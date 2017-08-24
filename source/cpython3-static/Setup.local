@@ -1,0 +1,178 @@
+*static*
+posix posixmodule.c -DHAVE_SYS_XATTR_H -I/usr/include		# posix (UNIX) system calls
+errno errnomodule.c		# posix (UNIX) errno values
+pwd pwdmodule.c			# this is needed to find out the user's home dir
+				# if $HOME is not set
+_sre _sre.c			# Fredrik Lundh's new regular expressions
+_codecs _codecsmodule.c		# access to the builtin codecs and codec registry
+_weakref _weakref.c		# weak references
+_functools _functoolsmodule.c   # Tools for working with functions and callable objects
+_operator _operator.c	        # operator.add() and similar goodies
+_collections _collectionsmodule.c # Container types
+itertools itertoolsmodule.c    # Functions creating iterators for efficient looping
+atexit atexitmodule.c      # Register functions to be run at interpreter-shutdown
+_signal signalmodule.c
+_stat _stat.c			# stat.h interface
+time timemodule.c	# -lm # time operations and variables
+_locale _localemodule.c  # -lintl
+_io -I$(srcdir)/Modules/_io _io/_iomodule.c _io/iobase.c _io/fileio.c _io/bytesio.c _io/bufferedio.c _io/textio.c _io/stringio.c
+zipimport zipimport.c
+faulthandler faulthandler.c
+_tracemalloc _tracemalloc.c hashtable.c
+
+_symtable symtablemodule.c
+#readline readline.c -I/usr/include/ -I/usr/include/readline -L/usr/lib -lreadline -ltermcap
+
+array arraymodule.c	# array objects
+cmath cmathmodule.c _math.c # -lm # complex math library functions
+math mathmodule.c _math.c # -lm # math library functions, e.g. sin()
+_struct _struct.c	# binary structure packing/unpacking
+_weakref _weakref.c	# basic weak reference support
+_random _randommodule.c	# Random number generator
+_elementtree -I$(srcdir)/Modules/expat -DHAVE_EXPAT_CONFIG_H -DUSE_PYEXPAT_CAPI _elementtree.c	# elementtree accelerator
+_pickle _pickle.c	# pickle accelerator
+_datetime _datetimemodule.c	# datetime accelerator
+_bisect _bisectmodule.c	# Bisection algorithms
+_heapq _heapqmodule.c	# Heap queue algorithm
+_asyncio _asynciomodule.c  # Fast asyncio Future
+
+unicodedata unicodedata.c    # static Unicode character database
+
+fcntl fcntlmodule.c	# fcntl(2) and ioctl(2)
+spwd spwdmodule.c		# spwd(3)
+grp grpmodule.c		# grp(3)
+select selectmodule.c	# select(2); not on ancient System V
+
+mmap mmapmodule.c
+
+_csv _csv.c
+
+_socket socketmodule.c
+
+_ssl _ssl.c \
+	-DUSE_SSL -I/usr/include -I/usr/include/openssl
+	-L/usr/lib -lssl -lcrypto
+
+_crypt _cryptmodule.c	# crypt(3); needs -lcrypt on some systems
+
+termios termios.c	# Steen Lumholt's termios module
+resource resource.c	# Jeremy Hylton's rlimit interface
+
+_posixsubprocess _posixsubprocess.c  # POSIX subprocess module helper
+
+audioop audioop.c	# Operations on audio samples
+
+_md5 md5module.c
+
+_sha1 sha1module.c
+_sha256 sha256module.c
+_sha512 sha512module.c
+
+_blake2 _blake2/blake2module.c _blake2/blake2b_impl.c _blake2/blake2s_impl.c
+
+#_tkinter _tkinter.c tkappinit.c -DWITH_APPINIT \
+# *** Uncomment and edit to reflect where your Tcl/Tk libraries are:
+#-L/usr/lib \
+# *** Uncomment and edit to reflect where your Tcl/Tk headers are:
+#-I/usr/include \
+# *** Uncomment and edit to reflect where your X11 header files are:
+#-I/usr/X11R6/include \
+# *** Uncomment and edit for Tix extension only:
+#-DWITH_TIX -ltix8.1.8.2 \
+# *** Uncomment and edit for BLT extension only:
+#-DWITH_BLT -I/usr/blt/blt8.0-unoff/include -lBLT8.0 \
+# *** Uncomment and edit for PIL (TkImaging) extension only:
+#     (See http://www.pythonware.com/products/pil/ for more info)
+#-DWITH_PIL -I../Extensions/Imaging/libImaging  tkImaging.c \
+# *** Uncomment and edit for TOGL extension only:
+#-DWITH_TOGL togl.c \
+# *** Uncomment and edit to reflect your Tcl/Tk versions:
+#-ltk8.2 -ltcl8.2 \
+# *** Uncomment and edit to reflect where your X11 libraries are:
+#-L/usr/X11R6/lib \
+# *** Uncomment these for TOGL extension only:
+#-lGL -lGLU -lXext -lXmu \
+# *** Always uncomment this; X11 libraries to link with:
+#-lX11
+
+syslog syslogmodule.c		# syslog daemon interface
+
+#_curses _cursesmodule.c -lcurses -ltermcap
+#_curses_panel _curses_panel.c -lpanel -lncurses
+
+#_dbm _dbmmodule.c -DHAVE_NDBM_H -I/usr/include	# dbm(3) may require -lndbm or similar
+
+_gdbm _gdbmmodule.c -I/usr/include -L/usr/lib -lgdbm
+
+binascii binascii.c
+
+parser parsermodule.c
+
+fpetest fpetestmodule.c
+
+zlib zlibmodule.c -I/usr/include -I$(srcdir)/Modules/zlib -L/usr/lib -lz
+
+pyexpat expat/xmlparse.c expat/xmlrole.c expat/xmltok.c pyexpat.c -I$(srcdir)/Modules/expat -DHAVE_EXPAT_CONFIG_H -DUSE_PYEXPAT_CAPI
+
+_multibytecodec cjkcodecs/multibytecodec.c
+
+_codecs_cn cjkcodecs/_codecs_cn.c
+_codecs_hk cjkcodecs/_codecs_hk.c
+_codecs_iso2022 cjkcodecs/_codecs_iso2022.c
+_codecs_jp cjkcodecs/_codecs_jp.c
+_codecs_kr cjkcodecs/_codecs_kr.c
+_codecs_tw cjkcodecs/_codecs_tw.c
+
+# Additional modules
+_lzma _lzmamodule.c -I/usr/include -L/usr/lib -llzma
+_bz2 _bz2module.c -I/usr/include -L/usr/lib -lbz2
+
+_json _json.c
+_ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/cfield.c _ctypes/malloc_closure.c _ctypes/stgdict.c \
+	-I/usr/include \
+	-I$(srcdir)/Modules/_ctypes \
+	-L/usr/lib -lffi
+_ctypes_test _ctypes/_ctypes_test.c
+
+MPDIR=$(srcdir)/Modules/_decimal/libmpdec
+_decimal _decimal/_decimal.c \
+	-I$(srcdir)/$(MPDIR) -DCONFIG_64 -DASM \
+	$(MPDIR)/basearith.c \
+	$(MPDIR)/crt.c \
+	$(MPDIR)/io.c \
+	$(MPDIR)/sixstep.c \
+	$(MPDIR)/constants.c \
+	$(MPDIR)/difradix2.c \
+	$(MPDIR)/memory.c \
+	$(MPDIR)/transpose.c \
+	$(MPDIR)/context.c \
+	$(MPDIR)/fnt.c \
+	$(MPDIR)/mpdecimal.c \
+	$(MPDIR)/convolute.c \
+	$(MPDIR)/fourstep.c \
+	$(MPDIR)/numbertheory.c
+
+#_lsprof _lsprof.c
+_multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c -I$(srcdir)/Modules
+_opcode _opcode.c
+_sha3 _sha3/sha3module.c
+
+#SQLITEDIR=$(srcdir)/Modules/_sqlite
+#UCHAR_MAX=UCHAR_MAX=255
+#MODULE_NAME=MODULE_NAME='"sqlite3"'
+
+#sqlite3 -I/usr/include -L/usr/lib -D$(UCHAR_MAX) -D$(MODULE_NAME) \
+#	$(SQLITEDIR)/cache.c \
+#  $(SQLITEDIR)/connection.c \
+#	$(SQLITEDIR)/cursor.c \
+#	$(SQLITEDIR)/microprotocols.c \
+#	$(SQLITEDIR)/module.c \
+#	$(SQLITEDIR)/prepare_protocol.c \
+#	$(SQLITEDIR)/row.c \
+#	$(SQLITEDIR)/statement.c \
+#	$(SQLITEDIR)/util.c
+
+#_testcapi _testcapimodule.c  # Python C API test module
+_testbuffer _testbuffer.c
+_testimportmultiple _testimportmultiple.c
+_testmultiphase _testmultiphase.c

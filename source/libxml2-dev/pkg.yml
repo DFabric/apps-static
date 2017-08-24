@@ -1,0 +1,9 @@
+deps:
+  alpine:
+  - g++
+  - make
+  - zlib-dev
+
+version:
+  src: http://xmlsoft.org/news.html
+  regex: (?<=h3>).*(?=: )

@@ -1,0 +1,13 @@
+deps:
+  source:
+  - libxml2-dev
+  alpine:
+  - g++
+  - libgcrypt-dev
+  - libgpg-error-dev
+  - make
+  - zlib-dev
+
+version:
+  src: http://xmlsoft.org/XSLT/news.html
+  regex: (?<=h3>).*(?=: )

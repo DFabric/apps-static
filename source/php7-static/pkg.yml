@@ -1,0 +1,44 @@
+deps:
+  source:
+  - icu-dev
+  - libxml2-dev
+  - libxslt-dev
+  alpine:
+  - apache2-dev
+  - apr-dev
+  - apr-util-dev
+  - aspell-dev
+  - bzip2-dev
+  - curl-dev
+  - db-dev
+  - enchant-dev
+  - expat-dev
+  - freetds-dev
+  - freetype-dev
+  - g++
+  - gdbm-dev
+  - gettext-dev
+  - gmp-dev
+  - imap-dev
+  - libevent-dev
+  - libgcrypt-dev
+  - libjpeg-turbo-dev
+  - libmcrypt-dev
+  - libpng-dev
+  - libressl-dev
+  - libtool
+  - make
+  - mariadb-dev
+  - net-snmp-dev
+  - openldap-dev
+  - postgresql-dev
+  - readline-dev
+  - sqlite-dev
+  - unixodbc-dev
+  - zlib-dev
+  - autoconf
+  - bison
+
+version:
+  src: http://docs.php.net/downloads.php
+  regex: (?<=id="v)7.*(?=" )

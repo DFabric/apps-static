@@ -1,0 +1,16 @@
+version:
+  src: https://docs.python.org/3/
+  regex: (?<=')3.*(?=',)
+
+deps:
+  alpine:
+  - bzip2-dev
+  - g++
+  - gdbm-dev
+  - libffi-dev
+  - libressl
+  - libressl-dev
+  - linux-headers
+  - make
+  - xz-dev
+  - zlib-dev

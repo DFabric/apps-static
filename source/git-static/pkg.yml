@@ -1,0 +1,14 @@
+deps:
+  alpine:
+  - g++
+  - libressl
+  - make
+  - perl
+  - perl-dev
+  - tcl-dev
+  - tk-dev
+  - zlib-dev
+
+version:
+  src: https://www.git-scm.com
+  regex: (?<=Notes*/).*(?=.txt)

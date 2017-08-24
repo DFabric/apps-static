@@ -1,0 +1,9 @@
+deps:
+  alpine:
+  - g++
+  - libressl
+  - make
+
+version:
+  src: http://site.icu-project.org/download
+  regex: (?<=C-Download">).*(?=<\/a)
