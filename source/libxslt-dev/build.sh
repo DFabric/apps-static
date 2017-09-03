@@ -7,6 +7,6 @@ cd libxslt-$ver
 touch libtoolT
 ln -s /usr/include/libxml2/libxml/ libxml
 ./configure --prefix=$DIR/$PACKAGE
-make -j4 install
+make -j$(nproc) install
 
 strip $DIR/$PACKAGE/lib/*.so* $DIR/$PACKAGE/lib/*.a

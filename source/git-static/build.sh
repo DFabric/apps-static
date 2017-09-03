@@ -14,7 +14,7 @@ cd git-$ver
   NO_SYS_POLL_H=1
 
 # Build & install to /usr/local
-make -j4 LDFLAGS=-static LINKFORSHARED= install
+make -j$(nproc) LDFLAGS=-static LINKFORSHARED= install
 
 # Strip
 strip $DIR/$PACKAGE/bin/* 2>/dev/null || true

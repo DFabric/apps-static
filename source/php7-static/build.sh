@@ -148,6 +148,6 @@ EOF
 # Add static compilation
 sed -i "s/-export-dynamic/-all-static -export-dynamic/g" Makefile
 
-make -j4 LDFLAGS=-static install
+make -j$(nproc) LDFLAGS=-static install
 
 strip $DIR/$PACKAGE/bin/php $DIR/$PACKAGE/bin/php-cgi $DIR/$PACKAGE/bin/phpdbg $DIR/$PACKAGE/sbin/php-fpm

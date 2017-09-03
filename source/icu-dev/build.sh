@@ -9,7 +9,7 @@ cd icu/source
 ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 # Build & install to /usr/local
-make -j4 install
+make -j$(nproc) install
 
 # Strip
 strip $DIR/$PACKAGE/lib/lib*.*
