@@ -11,5 +11,8 @@ ln -s /usr/include/locale.h /usr/include/xlocale.h
 # Build & install to /usr/local
 make -j$(nproc) install
 
+# Replace the prefix
+sed -i "s|default_prefix=\"$DIR/$PACKAGE\"|default_prefix=\"/usr\"|" $DIR/$PACKAGE/bin/icu-config
+
 # Strip
-strip $DIR/$PACKAGE/lib/lib*.*
+strip $DIR/$PACKAGE/lib/lib*.so

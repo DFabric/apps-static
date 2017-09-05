@@ -7,7 +7,8 @@ cd libxml2-$ver
 ./configure --prefix=$DIR/$PACKAGE
 make -j$(nproc) install
 
-strip $DIR/$PACKAGE/lib/*.so* $DIR/$PACKAGE/lib/*.a
+# Replace the prefix
+sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/bin/icu-config
 
-# Needed to build the index
-ranlib $DIR/$PACKAGE/lib/*.a
+# Strip
+strip $DIR/$PACKAGE/lib/lib*.so
