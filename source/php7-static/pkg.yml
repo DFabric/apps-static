@@ -9,7 +9,6 @@ deps:
   - apr-util-dev
   - aspell-dev
   - bzip2-dev
-  - curl-dev
   - db-dev
   - enchant-dev
   - expat-dev
@@ -17,9 +16,7 @@ deps:
   - freetype-dev
   - g++
   - gdbm-dev
-  - gettext-dev
   - gmp-dev
-  - imap-dev
   - libevent-dev
   - libgcrypt-dev
   - libjpeg-turbo-dev
@@ -32,10 +29,8 @@ deps:
   - net-snmp-dev
   - openldap-dev
   - postgresql-dev
-  - readline-dev
   - sqlite-dev
   - unixodbc-dev
-  - zlib-dev
   - autoconf
   - bison
 
