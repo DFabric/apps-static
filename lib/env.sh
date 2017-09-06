@@ -3,7 +3,7 @@
 BUILDDIR=${BUILDDIR:-/tmp}
 
 # Contain library archives and SHA512SUMS
-MIRROR=https://bitbucket.org/dfabric/binaries/downloads
+MIRROR=https://bitbucket.org/dfabric/packages/downloads
 
 COMPRESS=${COMPRESS:-true}
 

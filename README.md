@@ -8,13 +8,13 @@
 
 Simply download and extract the archive of the application. The path can be `/usr` or whatever you want.
 
-Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/binaries/downloads/)
+Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/packages/downloads/)
 
-`wget -qO- https://bitbucket.org/dfabric/binaries/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
+`wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
 
  or with curl
 
-`curl -sL https://bitbucket.org/dfabric/binaries/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
+`curl -sL https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
 
 A `$PACKAGE` folder will be created.
 
@@ -36,7 +36,7 @@ The `build.sh` list the commands to build the package
 Additional files can also be found depending of the needs.
 
 
-The builds are fully reproducible and their sha512 sums are stored in [SHA512SUMS](https://bitbucket.org/dfabric/binaries/downloads/SHA512SUMS)
+The builds are fully reproducible and their sha512 sums are stored in [SHA512SUMS](https://bitbucket.org/dfabric/packages/downloads/SHA512SUMS)
 
 ## Disclaimers
 
