@@ -1,0 +1,13 @@
+From https://git.alpinelinux.org/cgit/aports/tree/main/qemu/0001-linux-user-fix-build-with-musl-on-aarch64.patch
+
+--- hostdep.h.old
++++ hostdep.h
+@@ -25,7 +25,7 @@
+ static inline void rewind_if_in_safe_syscall(void *puc)
+ {
+     ucontext_t *uc = puc;
+-    __u64 *pcreg = &uc->uc_mcontext.pc;
++    uint64_t *pcreg = &uc->uc_mcontext.pc;
+
+     if (*pcreg > (uintptr_t)safe_syscall_start
+         && *pcreg < (uintptr_t)safe_syscall_end) {

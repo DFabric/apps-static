@@ -1,0 +1,20 @@
+deps:
+  static:
+  - zlib-dev
+  alpine:
+  - autoconf
+  - automake
+  - bison
+  - flex
+  - g++
+  - glib-dev
+  - glib-static
+  - libressl
+  - libtool
+  - linux-headers
+  - make
+  - python2
+
+version:
+  src: https://download.qemu.org/?C=M;O=D
+  regex: (?<=>qemu-).*\.[0-9](?=.tar.xz)
