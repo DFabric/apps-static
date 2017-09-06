@@ -2,8 +2,9 @@ deps:
   alpine:
   - g++
   - make
+  - python2-dev
   - zlib-dev
 
 version:
   src: http://xmlsoft.org/news.html
-  regex: (?<=h3>).*(?=: )
+  regex: (?<=h3>)[0-9].*(?=: )

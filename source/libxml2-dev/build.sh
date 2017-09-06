@@ -8,7 +8,7 @@ cd libxml2-$ver
 make -j$(nproc) install
 
 # Replace the prefix
-sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/bin/icu-config
+sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/bin/xml2-config
 
 # Strip
-strip $DIR/$PACKAGE/lib/lib*.so
+strip $DIR/$PACKAGE/lib/lib*.so*
