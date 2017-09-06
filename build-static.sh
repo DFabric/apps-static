@@ -6,6 +6,8 @@ set -eu
 DIR=$(cd -P $(dirname $0) && pwd)
 cd $DIR
 
+mkdir -p build
+
 usage() {
   cat <<EOF
 
