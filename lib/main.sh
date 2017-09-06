@@ -27,11 +27,12 @@ fi
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   # bring ssl_helper - needed for HTTPS
   apk add --update libressl
-  info "Installing source dependencies"
+  info "Installing static libraries dependencies"
+  sha512sums=$(wget -qO- $MIRROR/SHA512SUMS)
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    wget -qO- $MIRROR/$(wget -qO- $MIRROR/SHA512SUMS | grep -o "${dep}_.*_$KERNEL.$ARCH.*") | tar xjf -
+    wget -qO- $MIRROR/$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$KERNEL.$ARCH.*") | tar xjf -
     chown -R 0:0 ${dep}_*_$KERNEL.$ARCH*
     cp -r ${dep}_*_$KERNEL.$ARCH*/* /usr
     rm -r ${dep}_*_$KERNEL.$ARCH*

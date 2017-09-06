@@ -9,6 +9,8 @@ COMPRESS=${COMPRESS:-true}
 
 DEV=${DEV:-false}
 
+nproc=4
+
 KERNEL=linux
 
 case $(uname -m) in
