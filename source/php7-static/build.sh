@@ -4,10 +4,7 @@
 wget -qO- docs.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
 
 cd php-$ver
-# ranlib /usr/lib/libxml
-# zlib.net/zlib-1.2.11.tar.gz
 
-# --disable-all
 ./configure --prefix=$DIR/$PACKAGE LDFLAGS=-static \
  	--enable-static \
  	--disable-pear \
@@ -17,6 +14,7 @@ cd php-$ver
  		--enable-fpm \
  		--enable-cli \
  		--enable-phpdbg \
+  --enable-inline-optimization \
  	--disable-debug \
  	--disable-rpath \
  	--with-pic \
@@ -59,6 +57,8 @@ cd php-$ver
  	--enable-xmlreader \
  	  --with-xmlrpc \
  	--enable-wddx \
+  --enable-zip \
+    --with-zlib \
  	--without-db1 \
  	--without-db2 \
  	--without-db3 \

@@ -1,8 +1,9 @@
 deps:
-  source:
+  static:
   - icu-dev
   - libxml2-dev
   - libxslt-dev
+  - zlib-dev
   alpine:
   - apache2-dev
   - apr-dev

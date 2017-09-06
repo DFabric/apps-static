@@ -1,5 +1,5 @@
 deps:
-  source:
+  static:
   - libxml2-dev
   alpine:
   - g++

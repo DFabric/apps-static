@@ -1,8 +1,6 @@
-version:
-  src: https://docs.python.org/3/
-  regex: (?<=')3.*(?=',)
-
 deps:
+  static:
+  - zlib-dev
   alpine:
   - bzip2-dev
   - g++
@@ -13,4 +11,7 @@ deps:
   - linux-headers
   - make
   - xz-dev
-  - zlib-dev
+
+version:
+  src: https://docs.python.org/3/
+  regex: (?<=')3.*(?=',)

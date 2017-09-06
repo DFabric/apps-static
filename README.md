@@ -6,7 +6,7 @@
 
 ## Get the application
 
-Simply download and extract the archive of the application
+Simply download and extract the archive of the application. The path can be `/usr` or whatever you want.
 
 Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/binaries/downloads/)
 
@@ -26,10 +26,10 @@ You will need to have [Docker](https://www.docker.com/) installed. An Alpine Lin
 
 The sources of the build are all available in the `source` directory.
 
-Each program/library have its `pkg.yml` description file that:
-- source depencies (already builded with this tool)
-- Alpine Linux depencies
-- how to get the latest version of it (regex + url)
+Each program/library have its own `pkg.yml` description file that have:
+- the source dependencies (already builded with this tool)
+- the Alpine Linux dependencies
+- the latest version of it (regex + url)
 
 The `build.sh` list the commands to build the package
 
