@@ -8,7 +8,7 @@ cd Python-$ver
 
 # Prefix is not $PACKAGE becuase Make don't like '3:''
 ./configure LDFLAGS=-static \
-  --prefix=--prefix=$DIR/$PACKAGE \
+  --prefix=$DIR/$PACKAGE \
   --disable-shared \
   --enable-optimizations \
   --enable-ipv6 \
