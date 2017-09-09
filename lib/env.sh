@@ -1,17 +1,16 @@
 #!/bin/sh
+
 # Set the environment variables
 BUILDDIR=${BUILDDIR:-/tmp}
+COMPRESS=${COMPRESS:-true}
+DEV=${DEV:-false}
 
 # Contain library archives and SHA512SUMS
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
 
-COMPRESS=${COMPRESS:-true}
-
-DEV=${DEV:-false}
-
-nproc=4
-
-KERNEL=linux
+# System variables
+nproc=$(grep processor /proc/cpuinfo | wc -l)
+KERNEL=$(uname -s | tr A-Z a-z)
 
 case $(uname -m) in
 	x86_64) ARCH=x86-64;;
@@ -20,6 +19,9 @@ case $(uname -m) in
 	armv7*) ARCH=armv7;;
   *) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
 esac
+
+SYSTEM=${KERNEL}_$ARCH
+
 
 # Output
 info() { printf '%b\n' "\33[1;33mINFO\33[0m \33[1;39m$0\33[0m $1"; }

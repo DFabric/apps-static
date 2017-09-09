@@ -8,29 +8,24 @@ cd $DIR
 
 mkdir -p build
 
+. lib/env.sh
+
 usage() {
   cat <<EOF
-
-Usage: build-static [package] [arch]
+usage: $0 [package] (arch)
 
 Options:
 
-available packages:
+Available packages:
 $(ls -1 source)
 
-available architectures:
-You can build natively on the the desired architecture,
-or if you are on x86_64, qemu can be used for cross-compiling.
-- x86_64
-- x86 (backward compatible on x86_64)
-- armv7 (with qemu on x86_64)
-- arm64 (with qemu on x86_64)
+Available architectures:
+You can build natively on the the desired architecture.
+available: x86-64, x86, armv7, arm64 (default: $ARCH)
 
 EOF
   exit $1
 }
-
-. lib/env.sh
 
 if [ $(id -u) = 0 ] ;then
   error 'script runned as root' "This could be dangerous. To add yourself to the docker group: usermod -aG docker 'user'"
@@ -38,7 +33,7 @@ elif ! docker ps >/dev/null ;then
   error 'no Docker daemon' "not started or not available for $(whoami)"
 fi
 
-case ${1:-} in
+case ${1-} in
   -h|--help|'') usage 0;
 esac
 

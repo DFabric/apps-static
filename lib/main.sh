@@ -32,10 +32,10 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    wget -qO- $MIRROR/$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$KERNEL.$ARCH.*") | tar xjf -
-    chown -R 0:0 ${dep}_*_$KERNEL.$ARCH*
-    cp -r ${dep}_*_$KERNEL.$ARCH*/* /usr
-    rm -r ${dep}_*_$KERNEL.$ARCH*
+    wget -qO- $MIRROR/$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$SYSTEM.*") | tar xjf -
+    chown -R 0:0 ${dep}_*_$SYSTEM*
+    cp -rf ${dep}_*_$SYSTEM*/* /usr
+    rm -rf ${dep}_*_$SYSTEM*
   done
 fi
 
@@ -48,7 +48,7 @@ apk add --update $(readyaml -f pkg.yml deps alpine)
 
 # Create the directory
 PKG=${DIR#$BUILDDIR/*}
-PACKAGE=${PKG}_${ver}_linux.$ARCH
+PACKAGE=${PKG}_${ver}_$SYSTEM
 mkdir $PACKAGE
 
 info "Package to build: $PACKAGE"
@@ -68,7 +68,7 @@ if ! $DEV ;then
   elif $COMPRESS ;then
     info "Compressing $PACKAGE..."
     tar cjf $PACKAGE.tar.bz2 $PACKAGE
-    rm -r "$PACKAGE"
+    rm -rf "$PACKAGE"
     info "Compressed to $PACKAGE.tar.bz2!"
   fi
 else

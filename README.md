@@ -2,9 +2,35 @@
 
 ### Portable static applications
 
-#### Static applications, portable accross Linux (even non-GNU) distributions. For now on x86-64. x86, armv7 and arm64 coming soon.
+#### Static applications, portable across all Linuxes. Builds for x86, x86-64, armv7 and arm64.
+
+## Purpose
+
+- No root permissions needed
+
+- Don't potentially mess up your system - no dependencies
+
+- Commands available for the user if defined in the PATH
+
+- Portable across all Linuxes
 
 ## Get the application
+
+You can use the `helper.sh` script that will download and place the application for you in the `~/.local` directory defined in the PATH.
+
+To print the usage and view available packages:
+
+`wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh | $0 -`
+
+When you have chosen a package, replace `$PACKAGE` and install it locally:
+
+`wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh $PACKAGE | $0 -`
+
+
+You can also use `curl -sL` instead of `wget -qO-`
+
+
+## Manual download
 
 Simply download and extract the archive of the application. The path can be `/usr` or whatever you want.
 
@@ -12,9 +38,7 @@ Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabri
 
 `wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
 
- or with curl
-
-`curl -sL https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
+You can also use `curl -sL` instead of `wget -qO-`
 
 A `$PACKAGE` folder will be created.
 
