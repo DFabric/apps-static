@@ -2,7 +2,6 @@
 set -eu
 
 # From https://wiki.python.org/moin/BuildStatically
-
 wget -qO- https://www.python.org/ftp/python/$ver/Python-$ver.tar.xz | tar xJf -
 cd Python-$ver
 
@@ -12,7 +11,6 @@ cd Python-$ver
   --disable-shared \
   --enable-optimizations \
   --enable-ipv6 \
-  --enable-loadable-sqlite-extensions \
   --with-computed-gotos \
   --with-threads \
   --with-lto \
@@ -21,3 +19,6 @@ cd Python-$ver
 cp ../Setup.local Modules/Setup.local
 
 make -j$nproc LDFLAGS=-static LINKFORSHARED= install
+
+# Replace the prefix
+sed -i "s|prefix_build=\"$DIR/$PACKAGE\"|prefix_build=/usr|" $DIR/$PACKAGE/bin/python3-config

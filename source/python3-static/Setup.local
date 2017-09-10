@@ -157,20 +157,20 @@ _multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
 _opcode _opcode.c
 _sha3 _sha3/sha3module.c
 
-#SQLITEDIR=$(srcdir)/Modules/_sqlite
-#UCHAR_MAX=UCHAR_MAX=255
-#MODULE_NAME=MODULE_NAME='"sqlite3"'
+SQLITEDIR=$(srcdir)/Modules/_sqlite
+UCHAR_MAX=UCHAR_MAX=255
+MODULE_NAME=MODULE_NAME='"sqlite3"'
 
-#sqlite3 -I/usr/include -L/usr/lib -D$(UCHAR_MAX) -D$(MODULE_NAME) \
-#	$(SQLITEDIR)/cache.c \
-#  $(SQLITEDIR)/connection.c \
-#	$(SQLITEDIR)/cursor.c \
-#	$(SQLITEDIR)/microprotocols.c \
-#	$(SQLITEDIR)/module.c \
-#	$(SQLITEDIR)/prepare_protocol.c \
-#	$(SQLITEDIR)/row.c \
-#	$(SQLITEDIR)/statement.c \
-#	$(SQLITEDIR)/util.c
+_sqlite3 -I/usr/include -L/usr/lib -lsqlite3 -lpthread -ldl -D$(UCHAR_MAX) -D$(MODULE_NAME) \
+	$(SQLITEDIR)/cache.c \
+	$(SQLITEDIR)/connection.c \
+	$(SQLITEDIR)/cursor.c \
+	$(SQLITEDIR)/microprotocols.c \
+	$(SQLITEDIR)/module.c \
+	$(SQLITEDIR)/prepare_protocol.c \
+	$(SQLITEDIR)/row.c \
+	$(SQLITEDIR)/statement.c \
+	$(SQLITEDIR)/util.c
 
 #_testcapi _testcapimodule.c  # Python C API test module
 _testbuffer _testbuffer.c

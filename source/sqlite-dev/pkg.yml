@@ -1,0 +1,9 @@
+deps:
+  alpine:
+  - g++
+  - libressl
+  - make
+
+version:
+  src: https://sqlite.org/chronology.html
+  regex: (?<=">).*(?=</a><)

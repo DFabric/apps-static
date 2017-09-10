@@ -3,6 +3,7 @@ deps:
   - icu-dev
   - libxml2-dev
   - libxslt-dev
+  - sqlite-dev
   - zlib-dev
   alpine:
   - apache2-dev
@@ -30,7 +31,6 @@ deps:
   - net-snmp-dev
   - openldap-dev
   - postgresql-dev
-  - sqlite-dev
   - unixodbc-dev
   - autoconf
   - bison

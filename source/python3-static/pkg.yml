@@ -1,5 +1,6 @@
 deps:
   static:
+  - sqlite-dev
   - zlib-dev
   alpine:
   - bzip2-dev
