@@ -20,13 +20,24 @@ esac
 
 SYSTEM=${KERNEL}_$ARCH
 
+# Network functions
+if hash curl 2>/dev/null ;then
+  download() { [ "${2-}" ] && curl -\#L "$1" -o "$2"; }
+	getstring() { curl -Ls $@; }
+elif hash wget 2>/dev/null ;then
+  download() { [ "${2-}" ] && wget "$1" -O "$2"; }
+	getstring() { wget -qO- $@; }
+else
+  error 'curl or wget not found' 'you need to install either one of them'
+fi
+
 usage() {
   cat <<EOF
-usage: $0 [package]
+usage: $0 [package] (version)
 The application will be installed in ~/.local
 
 Available packages:
-$(wget -qO- $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.tar.bz2/\1\]/p" | tr _ \[)
+$(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.tar.bz2/\1\]/p" | tr _ \[)
 
 EOF
   exit $1
@@ -41,17 +52,16 @@ SH=${SHELL##*\/}
 
 # Add $HOME/.local/bin to the path
 local_path() {
-	if ! [ "$(grep -o $HOME/.local/bin ~/.${SH}rc)" ] ;then
+	if ! [ "$(grep -o \$HOME/.local/bin ~/.${SH}rc)" ] ;then
 		mkdir -p ~/.local
 		echo 'PATH="$HOME/.local/bin:$PATH"' >> ~/.${SH}rc
-		echo "$HOME/.local/bin:$PATH is added in your path."
+		echo '$HOME/.local/bin:$PATH is added in your path.'
 		echo "Restart a shell or use:"
-		echo "export PATH=\"$HOME/.local/bin:$PATH\""
+		echo 'export PATH="$HOME/.local/bin:$PATH"'
 	fi
 }
 
-
-package="$(wget -qO- $MIRROR/SHA512SUMS | grep -o $1_.*_$SYSTEM.tar.bz2 || true)"
+package=$(getstring $MIRROR/SHA512SUMS | grep -o "$1_${2-.*}_$SYSTEM.tar.bz2" || true)
 
 if ! [ "$package" ] ;then
 	echo "$1 package not found in $MIRROR"
@@ -60,10 +70,11 @@ else
 	name=${package%.tar.bz2}
 	local_path
 	cd /tmp
-	wget $MIRROR/$package
+	download $MIRROR/$package $package
 	echo "Extracting..."
 	tar xjf $package
 	rm $package
 	cp -rf $name/* ~/.local
+	rm -rf $name
 	echo "$name installed in $HOME/.local"
 fi

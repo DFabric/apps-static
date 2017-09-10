@@ -74,7 +74,7 @@ sh lib/main.sh"
 else
   docker run -it --rm -v $BUILDDIR/$PKG:$BUILDDIR/$PKG -w $BUILDDIR/$PKG alpine sh lib/main.sh || true
 
-  package=$(cd $BUILDDIR/$PKG; ls -d ${PKG}_*_$KERNEL.$ARCH*) \
+  package=$(cd $BUILDDIR/$PKG; ls -d ${PKG}_*_$SYSTEM*) \
   || { error "Build not found" "Your build is staying at $BUILDDIR/$PKG"; exit 1; }
 
   if [ "$package" ] && [ -d build/$package ] ;then
