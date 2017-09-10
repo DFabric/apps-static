@@ -5,7 +5,8 @@ wget -qO- docs.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
 
 cd php-$ver
 
-./configure --prefix=$DIR/$PACKAGE LDFLAGS=-static \
+./configure LDFLAGS=-static PHP_LDFLAGS=-all-static LIBS=-lssh2 \
+ 	--prefix=$DIR/$PACKAGE \
  	--enable-static \
  	--disable-pear \
  	--disable-shared \
@@ -14,7 +15,7 @@ cd php-$ver
  		--enable-fpm \
  		--enable-cli \
  		--enable-phpdbg \
-  --enable-inline-optimization \
+ 	--enable-inline-optimization \
  	--disable-debug \
  	--disable-rpath \
  	--with-pic \
@@ -23,6 +24,7 @@ cd php-$ver
  	--enable-calendar \
  	  --with-cdb \
  	--enable-ctype \
+ 	  --with-curl \
  	--enable-dom \
  	--enable-exif \
  	  --with-freetype-dir \
@@ -57,8 +59,8 @@ cd php-$ver
  	--enable-xmlreader \
  	  --with-xmlrpc \
  	--enable-wddx \
-  --enable-zip \
-    --with-zlib \
+ 	--enable-zip \
+ 	  --with-zlib \
  	--without-db1 \
  	--without-db2 \
  	--without-db3 \
@@ -66,9 +68,7 @@ cd php-$ver
  	--with-pdo-dblib \
  	--enable-opcache=no
 
-# Add static compilation
-sed -i "s/-export-dynamic/-all-static -export-dynamic/g" Makefile
+make V=1 -j$nproc PHP_LDFLAGS=-all-static install
 
-make -j$nproc LDFLAGS=-static install
-
+# Strip
 strip $DIR/$PACKAGE/bin/php $DIR/$PACKAGE/bin/php-cgi $DIR/$PACKAGE/bin/phpdbg $DIR/$PACKAGE/sbin/php-fpm

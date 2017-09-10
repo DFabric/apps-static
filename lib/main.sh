@@ -72,10 +72,10 @@ if ! $DEV ;then
     info "Compressed to $PACKAGE.tar.bz2!"
   fi
 else
-  printf "You're on dev mode, run build.sh? [N/y] "
+  printf "You're on dev mode, run build.sh? [Y/n] "
   read yn
    case $yn in
-     y|Y) . ./build.sh;;
-     *) printf "build.sh not runned.\n";;
+     n|N) printf "build.sh not runned.\n";;
+     *) . ./build.sh;;
    esac
 fi

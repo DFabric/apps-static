@@ -1,0 +1,13 @@
+deps:
+  static:
+  - zlib-dev
+  alpine:
+  - g++
+  - libressl
+  - libressl-dev
+  - libssh2-dev
+  - make
+
+version:
+  src: https://curl.haxx.se/download/?C=M;O=D
+  regex: (?<=-).*(?=.zip")
