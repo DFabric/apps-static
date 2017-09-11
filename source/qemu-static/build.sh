@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wget -qO- https://download.qemu-project.org/qemu-$ver.tar.bz2 | tar xjf -
+wget -qO- https://download.qemu-project.org/qemu-$ver.tar.xz | tar xJf -
 
 cd qemu-$ver
 

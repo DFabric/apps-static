@@ -36,7 +36,7 @@ Simply download and extract the archive of the application. The path can be `/us
 
 Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/packages/downloads/)
 
-`wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.bz2 | tar xjf -`
+`wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.xz | tar xJf -`
 
 You can also use `curl -sL` instead of `wget -qO-`
 

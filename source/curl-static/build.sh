@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wget -qO- https://curl.haxx.se/download/curl-$ver.tar.bz2 | tar xjf -
+wget -qO- https://curl.haxx.se/download/curl-$ver.tar.xz | tar xJf -
 cd curl-$ver
 
 ./configure LDFLAGS=-static PKG_CONFIG='pkg-config --static' --prefix=$DIR/$PACKAGE \

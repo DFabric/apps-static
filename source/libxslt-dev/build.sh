@@ -1,7 +1,6 @@
 #!/bin/sh
 
-wget -qO- ftp://xmlsoft.org/libxslt/libxslt-$ver.tar.gz | tar zxf -
-
+wget -qO- ftp://xmlsoft.org/libxml2/libxslt-$ver.tar.gz | tar zxf -
 cd libxslt-$ver
 
 touch libtoolT

@@ -16,5 +16,5 @@ deps:
   - python2
 
 version:
-  src: https://download.qemu.org/?C=M;O=D
+  src: https://download.qemu.org/?C=N;O=D
   regex: (?<=>qemu-).*\.[0-9](?=.tar.xz)
