@@ -1,6 +1,6 @@
 # apps-static
 
-### Portable static applications
+### Standalone portable applications
 
 #### Static applications, portable across all Linuxes. Builds for x86, x86-64, armv7 and arm64.
 
@@ -16,7 +16,7 @@
 
 ## Get the application
 
-You can use the `helper.sh` script that will download and place the application for you in the `~/.local` directory defined in the PATH.
+You can use the `helper.sh` script that will download and place the application for you in the `~/.local` directory that wipl be added in your $PATH.
 
 To print the usage and view available packages:
 
@@ -42,7 +42,7 @@ You can also use `curl -sL` instead of `wget -qO-`
 
 A `$PACKAGE` folder will be created.
 
-The binaries you will need are most likely to be in the `bin` folder, but can be on other location like `sbin` depending of the application/library.
+The binaries you will need are most likely to be in the `bin` folder, but other locations like `sbin` depending of the application/library.
 
 ## Building
 
@@ -55,7 +55,7 @@ Each program/library have its own `pkg.yml` description file that have:
 - the Alpine Linux dependencies
 - the latest version of it (regex + url)
 
-The `build.sh` list the commands to build the package
+The `build-static.sh` list the commands to build the package
 
 Additional files can also be found depending of the needs.
 
