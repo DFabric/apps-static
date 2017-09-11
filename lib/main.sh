@@ -13,9 +13,9 @@ if ! $DEV ;then
     info "Deleting $DIR"
     cd $DIR
     # Clean the build directory
-    [ "${PACKAGE-}" ] && [ -f $PACKAGE.tar.bz2 ] && mv $PACKAGE.tar.bz2 ..
+    [ "${PACKAGE-}" ] && [ -f $PACKAGE.tar.xz ] && mv $PACKAGE.tar.xz ..
     rm -rf *
-    [ "${PACKAGE-}" ] && [ -f ../$PACKAGE.tar.bz2 ] && mv ../$PACKAGE.tar.bz2 .
+    [ "${PACKAGE-}" ] && [ -f ../$PACKAGE.tar.xz ] && mv ../$PACKAGE.tar.xz .
   }
   trap clean EXIT INT QUIT TERM ABRT
 fi
@@ -32,7 +32,16 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    wget -qO- $MIRROR/$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$SYSTEM.*") | tar xjf -
+    package=$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$SYSTEM.tar.xz")
+    wget "$MIRROR/$package"
+    checksum=$(printf "$sha512sums\n "| grep "$package")
+    if [ "$checksum" = "$(sha512sum $package)" ] ;then
+      info "SHA512SUMS match for $dep"
+    else
+      error "SHA512SUMS" "don't match for $package"
+    fi
+    tar xjf $package
+    rm $package
     chown -R 0:0 ${dep}_*_$SYSTEM*
     cp -rf ${dep}_*_$SYSTEM*/* /usr
     rm -rf ${dep}_*_$SYSTEM*
@@ -63,13 +72,13 @@ if ! $DEV ;then
   cd $DIR
   chown -R 1000:1000 $PACKAGE
 
-  if $COMPRESS && [ -f build/$PACKAGE.tar.bz2 ] ;then
-    error "$DIR/build/$PACKAGE.tar.bz2" "the file already exist!"
+  if $COMPRESS && [ -f build/$PACKAGE.tar.xz ] ;then
+    error "$DIR/build/$PACKAGE.tar.xz" "the file already exist!"
   elif $COMPRESS ;then
     info "Compressing $PACKAGE..."
-    tar cjf $PACKAGE.tar.bz2 $PACKAGE
+    tar cjf $PACKAGE.tar.xz $PACKAGE
     rm -rf "$PACKAGE"
-    info "Compressed to $PACKAGE.tar.bz2!"
+    info "Compressed to $PACKAGE.tar.xz!"
   fi
 else
   printf "You're on dev mode, run build.sh? [Y/n] "

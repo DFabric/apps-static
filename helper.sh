@@ -37,7 +37,7 @@ usage: $0 [package] (version)
 The application will be installed in ~/.local
 
 Available packages:
-$(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.tar.bz2/\1\]/p" | tr _ \[)
+$(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.*/\1\]/p" | tr _ \[)
 
 EOF
   exit $1
@@ -61,16 +61,24 @@ local_path() {
 	fi
 }
 
-package=$(getstring $MIRROR/SHA512SUMS | grep -o "$1_${2-.*}_$SYSTEM.tar.bz2" || true)
+sha512sums=$(getstring $MIRROR/SHA512SUMS)
+package=$(printf "$sha512sums\n" | grep -o "$1_${2-.*}_$SYSTEM.tar.xz" || true)
 
 if ! [ "$package" ] ;then
 	echo "$1 package not found in $MIRROR"
 	usage 1
 else
-	name=${package%.tar.bz2}
+	name=${package%.tar.xz}
 	local_path
 	cd /tmp
+	checksum=$(printf "$sha512sums\n "| grep "$package")
 	download $MIRROR/$package $package
+	if [ "$checksum" = "$(sha512sum $package)" ] ;then
+		echo "SHA512SUMS match"
+	else
+		echo "SHA512SUMS don't match"
+		exit 1
+	fi
 	echo "Extracting..."
 	tar xjf $package
 	rm $package
