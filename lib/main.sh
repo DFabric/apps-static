@@ -40,7 +40,7 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     else
       error "SHA512SUMS" "don't match for $package"
     fi
-    tar xjf $package
+    tar xJf $package
     rm $package
     chown -R 0:0 ${dep}_*_$SYSTEM*
     cp -rf ${dep}_*_$SYSTEM*/* /usr
@@ -76,7 +76,8 @@ if ! $DEV ;then
     error "$DIR/build/$PACKAGE.tar.xz" "the file already exist!"
   elif $COMPRESS ;then
     info "Compressing $PACKAGE..."
-    tar cjf $PACKAGE.tar.xz $PACKAGE
+    apk add --update xz
+    tar cJf $PACKAGE.tar.xz $PACKAGE
     rm -rf "$PACKAGE"
     info "Compressed to $PACKAGE.tar.xz!"
   fi

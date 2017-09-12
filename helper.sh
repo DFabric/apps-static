@@ -80,7 +80,7 @@ else
 		exit 1
 	fi
 	echo "Extracting..."
-	tar xjf $package
+	tar xJf $package
 	rm $package
 	cp -rf $name/* ~/.local
 	rm -rf $name
