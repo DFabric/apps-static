@@ -1,4 +1,6 @@
 deps:
+  static:
+  - zlib-dev
   alpine:
   - g++
   - libressl
@@ -7,7 +9,6 @@ deps:
   - perl-dev
   - tcl-dev
   - tk-dev
-  - zlib-dev
 
 version:
   src: https://www.git-scm.com
