@@ -17,7 +17,7 @@ if ! $DEV ;then
     rm -rf *
     [ "${PACKAGE-}" ] && [ -f ../$PACKAGE.tar.xz ] && mv ../$PACKAGE.tar.xz .
   }
-  trap clean EXIT INT QUIT TERM ABRT
+    trap clean EXIT INT QUIT TERM ABRT
 fi
 
 # Libraries
@@ -34,8 +34,10 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     info "Installing $dep"
     package=$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$SYSTEM.tar.xz")
     wget "$MIRROR/$package"
-    checksum=$(printf "$sha512sums\n "| grep "$package")
-    if [ "$checksum" = "$(sha512sum $package)" ] ;then
+
+    # Verify shasum
+    shasum=$(printf "$sha512sums\n "| grep "$package")
+    if [ "$shasum" = "$(sha512sum $package)" ] ;then
       info "SHA512SUMS match for $dep"
     else
       error "SHA512SUMS" "don't match for $package"
@@ -75,8 +77,8 @@ if ! $DEV ;then
   if $COMPRESS && [ -f build/$PACKAGE.tar.xz ] ;then
     error "$DIR/build/$PACKAGE.tar.xz" "the file already exist!"
   elif $COMPRESS ;then
-    info "Compressing $PACKAGE..."
     apk add --update xz
+    info "Compressing $PACKAGE..."
     tar cJf $PACKAGE.tar.xz $PACKAGE
     rm -rf "$PACKAGE"
     info "Compressed to $PACKAGE.tar.xz!"

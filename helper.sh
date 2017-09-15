@@ -14,9 +14,10 @@ case $(uname -m) in
 	x86_64) ARCH=x86-64;;
 	i*86) ARCH=x86;;
 	aarch64) ARCH=arm64;;
-	armv7*) ARCH=armv7;;
+	armv7*) ARCH=armhf;;
   *) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
 esac
+ARCH=${3-$ARCH}
 
 SYSTEM=${KERNEL}_$ARCH
 
@@ -33,11 +34,15 @@ fi
 
 usage() {
   cat <<EOF
-usage: $0 [package] (version)
+usage: $0 [package] (version) (architecture)
 The application will be installed in ~/.local
 
 Available packages:
 $(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.*/\1\]/p" | tr _ \[)
+
+Available architectures:
+[x86-64, x86, armhf, arm64] (default: $ARCH)
+
 
 EOF
   exit $1
@@ -71,9 +76,11 @@ else
 	name=${package%.tar.xz}
 	local_path
 	cd /tmp
-	checksum=$(printf "$sha512sums\n "| grep "$package")
+
+	# Very shasum
+	shasum=$(printf "$sha512sums\n "| grep "$package")
 	download $MIRROR/$package $package
-	if [ "$checksum" = "$(sha512sum $package)" ] ;then
+	if [ "$shasum" = "$(sha512sum $package)" ] ;then
 		echo "SHA512SUMS match"
 	else
 		echo "SHA512SUMS don't match"

@@ -2,7 +2,7 @@
 
 ### Standalone portable applications
 
-#### Static applications, portable across all Linuxes. Builds for x86, x86-64, armv7 and arm64.
+#### Static applications, portable across all Linuxes. Builds for x86, x86-64, armhf and arm64.
 
 ## Purpose
 
