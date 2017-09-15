@@ -4,9 +4,14 @@ wget -qO- https://download.qemu-project.org/qemu-$ver.tar.xz | tar xJf -
 
 cd qemu-$ver
 
+case $ARCH in
+  x86|x86_64) target=arm-softmmu,aarch64-softmmu;;
+  arm64|armhf) target=i386-softmmu,x86_64-softmmu;;
+esac
+
 ./configure --static --prefix=$DIR/$PACKAGE \
   --extra-cflags=-DCONFIG_RTNETLINK \
-  --target-list=arm-linux-user,aarch64-linux-user
+  --target-list=$target
 
 # Apply patches from ALpine on the qemu source, mainly musl related
 # https://git.alpinelinux.org/cgit/aports/tree/main/qemu

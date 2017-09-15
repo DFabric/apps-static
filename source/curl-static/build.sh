@@ -13,11 +13,8 @@ cd curl-$ver
   --disable-ldap \
   --with-pic
 
-make V=1 -j$nproc curl_LDFLAGS=-all-static install
+make V=1 -j$nproc curl_LDFLAGS=-all-static install-strip
 
 # Replace the prefix
 sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/bin/curl-config
 sed -i "s|libdir='$DIR/$PACKAGE/lib'|libdir='/usr/lib'|" $DIR/$PACKAGE/lib/libcurl.la
-
-# Strip
-strip $DIR/$PACKAGE/bin/curl

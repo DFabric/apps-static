@@ -14,8 +14,4 @@ cd git-$ver
   NO_SYS_POLL_H=1
 
 # Build & install to /usr/local
-make -j$nproc LDFLAGS=-static LINKFORSHARED= install
-
-# Strip
-strip $DIR/$PACKAGE/bin/* 2>/dev/null || true
-strip $DIR/$PACKAGE/libexec/git-core/* 2>/dev/null || true
+make -j$nproc LDFLAGS=-static LINKFORSHARED= install strip
