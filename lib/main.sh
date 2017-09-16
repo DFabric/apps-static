@@ -32,16 +32,15 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    package=$(printf '%b' "$sha512sums\n" | grep -o "${dep}_.*_$SYSTEM.tar.xz")
+    package=$(printf '%b' "$sha512sums\n" | grep -om1 "${dep}_.*_$SYSTEM.tar.xz")
     wget "$MIRROR/$package"
 
     # Verify shasum
     shasum=$(printf "$sha512sums\n "| grep "$package")
-    if [ "$shasum" = "$(sha512sum $package)" ] ;then
-      info "SHA512SUMS match for $dep"
-    else
-      error "SHA512SUMS" "don't match for $package"
-    fi
+    case $shasum in
+      "$(sha512sum $package)") info "SHA512SUMS match for $dep";;
+      *) error "SHA512SUMS" "don't match for $package";;
+    esac
     tar xJf $package
     rm $package
     chown -R 0:0 ${dep}_*_$SYSTEM*

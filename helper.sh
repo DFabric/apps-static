@@ -80,12 +80,10 @@ else
 	# Very shasum
 	shasum=$(printf "$sha512sums\n "| grep "$package")
 	download $MIRROR/$package $package
-	if [ "$shasum" = "$(sha512sum $package)" ] ;then
-		echo "SHA512SUMS match"
-	else
-		echo "SHA512SUMS don't match"
-		exit 1
-	fi
+	case $shasum in
+		"$(sha512sum $package)") echo "SHA512SUMS match for $package";;
+		*) echo "SHA512SUMS" "don't match for $package"; exit 1;;
+	esac
 	echo "Extracting..."
 	tar xJf $package
 	rm $package

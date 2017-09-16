@@ -55,7 +55,7 @@ elif [ "${2-}" ] && [ "${2-}" != "$ARCH" ] ;then
   cd $BUILDDIR
   if ! [ -f "$BUILDDIR/$qemu" ] ;then
     BINMIRROR=https://bitbucket.org/dfabric/binaries/downloads
-    info "Installing $qemu"
+    info "Downloading $qemu"
     sha512sums=$(wget -qO- $BINMIRROR/SHA512SUMS) || error "$BINMIRROR/SHA512SUMS" "can't retrieve the file"
     package=$(printf '%b' "$sha512sums\n" | grep -o "${qemu}")
     wget "$BINMIRROR/$package"
