@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wget -qO- ftp://xmlsoft.org/libxml2/libxslt-$ver.tar.gz | tar zxf -
+wget -qO- https://git.gnome.org/browse/libxslt/snapshot/libxslt-$ver.tar.xz | tar xJf -
 cd libxslt-$ver
 
 touch libtoolT

@@ -1,7 +1,6 @@
 #!/bin/sh
 
-wget -qO- ftp://xmlsoft.org/libxml2/libxml2-$ver.tar.gz | tar zxf -
-
+wget -qO- https://git.gnome.org/browse/libxml2/snapshot/libxml2-$ver.tar.xz | tar xJf -
 cd libxml2-$ver
 
 ./configure --prefix=$DIR/$PACKAGE

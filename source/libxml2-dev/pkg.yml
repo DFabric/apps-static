@@ -3,9 +3,10 @@ deps:
   - zlib-dev
   alpine:
   - g++
+  - libressl
   - make
   - python2-dev
 
 version:
-  src: http://xmlsoft.org/news.html
-  regex: (?<=h3>)[0-9].*(?=: )
+  src: https://git.gnome.org/browse/libxml2/refs/
+  regex: (?<=>v).*(?=</a><)
