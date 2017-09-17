@@ -28,12 +28,20 @@ case ${1-} in
   -h|--help|'') usage 0;
 esac
 
+if [ $(id -u) = 0 ] ;then
+  error 'script runned as root' "This could be dangerous. To add yourself to the docker group: usermod -aG docker 'user'"
+elif ! docker ps >/dev/null ;then
+  error 'no Docker daemon' "not started or not available for $(whoami)"
+fi
+
 PKG=$1
 qemu=
 QEMU_EXECVE=
 PKGDIR=$BUILDDIR/$PKG
-[ "$(ls $PKGDIR 2>/dev/null)" ] && error "$PKGDIR" 'already present, delete it first'
 
+# Check build directory
+mkdir -p $PKGDIR
+[ "$(ls $PKGDIR 2>/dev/null)" ] && error "$PKGDIR" 'already present, delete it first'
 [ -d "source/$PKG" ] || { error "source/$PKG" 'not found.'; }
 
 #Not need for Qemu
@@ -86,7 +94,6 @@ case $ARCH in
 esac
 
 # Copy on the build directory
-mkdir -p $PKGDIR
 cp -r $DIR/source/$PKG/* $PKGDIR
 cp -r $DIR/lib $PKGDIR
 
