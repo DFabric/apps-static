@@ -2,8 +2,7 @@
 set -eu
 
 # Current directory
-DIR=$(cd -P $(dirname $0) && pwd)
-cd $DIR
+cd $(pwd)/$(dirname $0)
 
 # Must match lib/env.sh
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
@@ -37,12 +36,11 @@ usage() {
 usage: $0 [package] (version) (architecture)
 The application will be installed in ~/.local
 
-Available packages:
+Available packages for $SYSTEM:
 $(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.*/\1\]/p" | tr _ \[)
 
 Available architectures:
 [x86-64, x86, armhf, arm64] (default: $ARCH)
-
 
 EOF
   exit $1

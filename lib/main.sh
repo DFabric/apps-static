@@ -27,7 +27,7 @@ fi
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   # bring ssl_helper - needed for HTTPS
   apk add --update libressl
-  info "Installing static libraries dependencies"
+  info 'Installing static libraries dependencies'
   sha512sums=$(wget -qO- $MIRROR/SHA512SUMS)
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
@@ -50,11 +50,11 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
 fi
 
 # Alpine dependencies
-info "Installing system depencies"
+info 'Installing system depencies'
 apk add --update $(readyaml -f pkg.yml deps alpine)
 
 [ "${ver-}" ] || ver=$(regexlook -w "$(readyaml -f pkg.yml version regex)" "$(readyaml -f pkg.yml version src)" | head -1)
-[ "${ver-}" ] || error 'ver' "no version number returned"
+[ "${ver-}" ] || error 'ver' 'no version number returned'
 
 # Create the directory
 PKG=${DIR#$BUILDDIR/*}
