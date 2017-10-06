@@ -24,6 +24,10 @@ fi
 . lib/regexlook.sh
 . lib/readyaml.sh
 
+# Alpine dependencies
+info 'Installing system depencies'
+apk add --update $(readyaml -f pkg.yml deps alpine)
+
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   # bring ssl_helper - needed for HTTPS
   apk add --update libressl
@@ -36,8 +40,7 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     wget "$MIRROR/$package"
 
     # Verify shasum
-    shasum=$(printf "$sha512sums\n "| grep "$package")
-    case $shasum in
+    case $(printf "$sha512sums\n "| grep "$package") in
       "$(sha512sum $package)") info "SHA512SUMS match for $dep";;
       *) error "SHA512SUMS" "don't match for $package";;
     esac
@@ -48,10 +51,6 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     rm -rf ${dep}_*_$SYSTEM*
   done
 fi
-
-# Alpine dependencies
-info 'Installing system depencies'
-apk add --update $(readyaml -f pkg.yml deps alpine)
 
 [ "${ver-}" ] || ver=$(regexlook -w "$(readyaml -f pkg.yml version regex)" "$(readyaml -f pkg.yml version src)" | head -1)
 [ "${ver-}" ] || error 'ver' 'no version number returned'
