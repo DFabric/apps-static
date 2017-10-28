@@ -1,6 +1,6 @@
 #!/bin/sh
 
-year=$(regexlook -w '(?<=").*(?=-[09])' https://sqlite.org/releaselog/$(printf "$ver" | tr . _).html)
+year=$(regexlook -w '(?<=").*(?=-[0-9][0-9]-)' https://sqlite.org/releaselog/$(printf "$ver" | tr . _).html)
 id=$(regexlook -w "(?<=key=').*(?='.*$ver)" https://sqlite.org/chronology.html)
 
 wget -qO- https://sqlite.org/$year/sqlite-autoconf-$id.tar.gz | tar zxf -

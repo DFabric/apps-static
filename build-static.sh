@@ -111,8 +111,11 @@ else
      error "$DIR/build/$package" "the file already exist!\
  Your build is staying at $PKGDIR"
      exit 1
-  elif [ "$package" ] && mv -n "$PKGDIR/$package" "$DIR/build" && info "Your build is now at '$DIR/build/$package'" ;then
+  elif [ "$package" ] && mv -n "$PKGDIR/$package" "$DIR/build" ;then
+    info "Your build is now at '$DIR/build/$package'"
     rm -rf $PKGDIR
+    cd $DIR/build
+    sha512sum $package >> SHA512SUMS
   else
     error "$PKGDIR/$package" "an error occured when moving  to $DIR/build!\
  Your build is staying at $PKGDIR/$package"
