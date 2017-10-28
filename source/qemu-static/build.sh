@@ -5,7 +5,7 @@ wget -qO- https://download.qemu-project.org/qemu-$ver.tar.xz | tar xJf -
 cd qemu-$ver
 
 case $ARCH in
-  x86|x86_64) target=arm-softmmu,aarch64-softmmu;;
+  x86|x86-64) target=arm-softmmu,aarch64-softmmu;;
   arm64|armhf) target=i386-softmmu,x86_64-softmmu;;
 esac
 
