@@ -1,0 +1,9 @@
+deps:
+  alpine:
+  - g++
+  - libressl
+  - make
+
+version:
+  src: https://github.com/nmathewson/Libevent
+  regex: (?<=data-name="release-).*(?=-stable)
