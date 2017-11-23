@@ -1,0 +1,19 @@
+deps:
+  static:
+  - curl-static
+  - libevent-dev
+  alpine:
+  - automake
+  - autoconf
+  - bsd-compat-headers
+  - g++
+  - libressl-dev
+  - make
+  - intltool
+  - libssh2-dev
+  - tar
+  - xz
+
+version:
+  src: https://github.com/transmission/transmission
+  regex: (?<=data-name=")[0-9]\.[0-9][0-9](?=")
