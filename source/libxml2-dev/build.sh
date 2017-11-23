@@ -6,6 +6,3 @@ cd libxml2-$ver
 
 ./configure --prefix=$DIR/$PACKAGE
 make -j$nproc install-strip
-
-# Replace the prefix
-sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/bin/xml2-config

@@ -15,7 +15,3 @@ cd sqlite-autoconf-$id
 
 # Build & install to /usr/local
 make -j$nproc install-strip
-
-# Replace the prefix
-sed -i "s|prefix=$DIR/$PACKAGE|prefix=/usr|" $DIR/$PACKAGE/lib/pkgconfig/sqlite3.pc
-sed -i "s|libdir='$DIR/$PACKAGE/lib'|libdir='/usr/lib'|" $DIR/$PACKAGE/lib/libsqlite3.la

@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# Alpine dependencies
 wget -qO- docs.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
-
 cd php-$ver
 
 ./configure LDFLAGS=-static PHP_LDFLAGS=-all-static LIBS=-lssh2 \

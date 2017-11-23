@@ -1,7 +1,6 @@
 #!/bin/sh
 
 wget -qO- https://www.kernel.org/pub/software/scm/git/git-$ver.tar.xz | tar xJf -
-
 cd git-$ver
 
 ./configure --prefix=$DIR/$PACKAGE \

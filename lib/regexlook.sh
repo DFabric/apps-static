@@ -51,7 +51,7 @@ EOF
         fi;;
     esac;;
   esac
-  regex=$(printf '%s' "$1" | sed 's|\\\\|\n1|g;s|\\|\n2|g;s|/|\\/|g;s|\n2||g;s|\n1|\\\\|g')
+  regex=$(printf '%s' "$1" | sed -e 's|\\\\|\n1|g;s|\\|\n2|g;s|/|\\/|g;s|\n2||g;s|\n1|\\\\|g' -e 's|\]+|\]\\+|g')
   shift
   source="$@"
   # Lookbehind
