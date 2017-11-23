@@ -7,12 +7,10 @@ cd php-$ver
  	--prefix=$DIR/$PACKAGE \
  	--enable-static \
  	--disable-pear \
- 	--disable-shared \
- 		--disable-cli \
- 		--enable-cgi \
- 		--enable-fpm \
- 		--enable-cli \
- 		--enable-phpdbg \
+ 	--enable-cgi \
+ 	--enable-fpm \
+ 	--enable-cli \
+ 	--enable-phpdbg \
  	--enable-inline-optimization \
  	--disable-debug \
  	--disable-rpath \

@@ -6,7 +6,6 @@ cd Python-$ver
 
 ./configure LDFLAGS=-static \
   --prefix=$DIR/$PACKAGE \
-  --disable-shared \
   --enable-optimizations \
   --enable-ipv6 \
   --with-computed-gotos \
