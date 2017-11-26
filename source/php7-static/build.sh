@@ -62,7 +62,7 @@ cd php-$ver
  	--without-db3 \
  	--without-qdbm \
  	--with-pdo-dblib \
- 	--enable-opcache=no
+ 	--enable-opcache
 
 make V=1 -j$nproc PHP_LDFLAGS=-all-static install
 
