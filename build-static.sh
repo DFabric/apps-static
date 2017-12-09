@@ -97,6 +97,7 @@ esac
 cp -r $DIR/source/$PKG/* $PKGDIR
 cp -r $DIR/lib $PKGDIR
 
+docker pull $DARCH/alpine
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
 sh lib/main.sh"
