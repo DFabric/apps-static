@@ -4,10 +4,10 @@ deps:
   - icu-dev
   - libxml2-dev
   - libxslt-dev
+  - libevent-dev
   - sqlite-dev
   - zlib-dev
   alpine:
-  - apache2-dev
   - apr-dev
   - apr-util-dev
   - aspell-dev
@@ -32,7 +32,7 @@ deps:
   - mariadb-dev
   - net-snmp-dev
   - openldap-dev
-  - postgresql-dev
+  - readline-dev
   - unixodbc-dev
   - autoconf
   - bison
