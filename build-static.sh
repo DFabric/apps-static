@@ -19,14 +19,25 @@ $(ls -1 source)
 
 Available architectures:
 [x86-64, x86, armhf, arm64] (default: $ARCH)
+- can be a comma-separated list
 
 EOF
   exit $1
 }
 
+parsearch() {
+  local IFS=,
+  for arch in $1 ;do
+    ./build-static.sh $PKG $arch
+  done
+  info "builds completed for $1"
+  exit
+}
+
 case ${1-} in
   -h|--help|'') usage 0;
 esac
+
 
 if [ $(id -u) = 0 ] ;then
   error 'script runned as root' "This could be dangerous. To add yourself to the docker group: usermod -aG docker 'user'"
@@ -39,12 +50,16 @@ qemu=
 QEMU_EXECVE=
 PKGDIR=$BUILDDIR/$PKG
 
+case ${2-} in
+  *,*) parsearch $2;;
+esac
+
 # Check build directory
 mkdir -p $PKGDIR
 [ "$(ls $PKGDIR 2>/dev/null)" ] && error "$PKGDIR" 'already present, delete it first'
 [ -d "source/$PKG" ] || { error "source/$PKG" 'not found.'; }
 
-#Not need for Qemu
+# No need of Qemu
 if [ "${2-}" = x86 ] && [ "$ARCH" = x86-64 ]; then
   DARCH=i386
 
