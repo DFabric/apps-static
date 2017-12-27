@@ -3,7 +3,7 @@
 wget -qO- https://www.kernel.org/pub/software/scm/git/git-$ver.tar.xz | tar xJf -
 cd git-$ver
 
-./configure --prefix=$DIR/$PACKAGE \
+./configure --prefix='/' \
   LDFLAGS=-static \
   NO_GETTEXT=YesPlease \
   NO_SVN_TESTS=YesPlease \
@@ -12,5 +12,5 @@ cd git-$ver
   NO_NSEC=YesPlease \
   NO_SYS_POLL_H=1
 
-# Build & install to /usr/local
-make -j$nproc LDFLAGS=-static LINKFORSHARED= install strip
+# Build & install
+make -j$nproc LDFLAGS=-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install strip

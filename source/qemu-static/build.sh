@@ -8,7 +8,7 @@ case $ARCH in
   arm64|armhf) target=i386-softmmu,x86_64-softmmu;;
 esac
 
-./configure --static --prefix=$DIR/$PACKAGE \
+./configure --static --prefix='/' \
   --extra-cflags=-DCONFIG_RTNETLINK \
   --target-list=$target
 
@@ -24,4 +24,4 @@ cd host/aarch64
 patch < $DIR/0001-linux-user-fix-build-with-musl-on-aarch64.patch
 
 cd ../../..
-make -j$nproc install
+make -j$nproc DESTDIR="$DIR/$PACKAGE" install

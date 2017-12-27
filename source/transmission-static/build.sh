@@ -8,11 +8,11 @@ cd transmission-$ver
 # Fix the fact that $LDFLAGS is present after $CC, but this later don't recognize the '-all-static' argument
 sed -i 's/ $LDFLAGS / -static /g' configure
 
-./configure --prefix=$DIR/$PACKAGE \
+./configure --prefix='/' \
   LDFLAGS=-all-static \
   --enable-utp \
   --with-inotify \
   --enable-cli
 
 # Build & install to /usr/local
-make -j$nproc LDFLAGS=-all-static LINKFORSHARED= install-strip
+make -j$nproc LDFLAGS=-all-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install-strip

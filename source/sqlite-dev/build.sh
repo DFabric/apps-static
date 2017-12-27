@@ -8,7 +8,7 @@ wget -qO- https://sqlite.org/$year/sqlite-autoconf-$id.tar.gz | tar zxf -
 cd sqlite-autoconf-$id
 
 ./configure \
-  --prefix=$DIR/$PACKAGE \
+  --prefix='/' \
   --enable-static \
   --enable-shared \
   --enable-threadsafe \
@@ -28,4 +28,4 @@ cd sqlite-autoconf-$id
   -DSQLITE_ENABLE_JSON1 -Iext/fts5"
 
 # Build & install
-make -j$nproc install-strip
+make -j$nproc DESTDIR="$DIR/$PACKAGE" install-strip

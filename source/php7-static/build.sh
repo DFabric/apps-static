@@ -4,7 +4,7 @@ wget -qO- docs.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
 cd php-$ver
 
 ./configure LDFLAGS=-static PHP_LDFLAGS=-all-static LIBS=-lssh2 \
- 	--prefix=$DIR/$PACKAGE \
+ 	--prefix='/' \
  	--enable-static \
  	--enable-cgi \
  	--enable-fpm \
@@ -59,8 +59,8 @@ cd php-$ver
  	--with-pdo-dblib \
  	--enable-opcache
 
-make -j$nproc PHP_LDFLAGS=-all-static
-make -j$nproc PHP_LDFLAGS=-all-static install
+make -j$nproc PHP_LDFLAGS=-all-static DESTDIR="$DIR/$PACKAGE"
+make -j$nproc PHP_LDFLAGS=-all-static DESTDIR="$DIR/$PACKAGE" install
 
 # Strip
 strip $DIR/$PACKAGE/bin/php $DIR/$PACKAGE/bin/php-cgi $DIR/$PACKAGE/bin/phpdbg $DIR/$PACKAGE/sbin/php-fpm

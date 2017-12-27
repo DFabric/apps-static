@@ -3,7 +3,7 @@
 wget -qO- https://curl.haxx.se/download/curl-$ver.tar.xz | tar xJf -
 cd curl-$ver
 
-./configure LDFLAGS=-static PKG_CONFIG='pkg-config --static' --prefix=$DIR/$PACKAGE \
+./configure LDFLAGS=-static PKG_CONFIG='pkg-config --static' --prefix='/' \
   --enable-static \
   --enable-ipv6 \
   --enable-unix-sockets \
@@ -12,4 +12,4 @@ cd curl-$ver
   --disable-ldap \
   --with-pic
 
-make V=1 -j$nproc curl_LDFLAGS=-all-static install-strip
+make V=1 -j$nproc curl_LDFLAGS=-all-static DESTDIR="$DIR/$PACKAGE" install-strip

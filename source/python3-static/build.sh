@@ -15,4 +15,4 @@ cd Python-$ver
 
 cp ../Setup.local Modules/Setup.local
 
-make -j$nproc LDFLAGS=-static LINKFORSHARED= install
+make -j$nproc LDFLAGS=-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install
