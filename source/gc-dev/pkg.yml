@@ -1,0 +1,10 @@
+deps:
+  alpine:
+  - g++
+  - libatomic_ops-dev
+  - libressl
+  - make
+
+version:
+  src: https://github.com/ivmai/bdwgc
+  regex: (?<=data-name="v).*(?=")
