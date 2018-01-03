@@ -2,11 +2,13 @@
 set -eu
 
 # Current directory
-cd $(pwd)/$(dirname $0)
+DIR=$PWD/$(dirname $0)
+cd $DIR
 
 # Must match lib/env.sh
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
 
+DIR=$PWD
 KERNEL=$(uname -s | tr A-Z a-z)
 
 case $(uname -m) in
@@ -14,7 +16,7 @@ case $(uname -m) in
 	i*86) ARCH=x86;;
 	aarch64) ARCH=arm64;;
 	armv7*) ARCH=armhf;;
-  *) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
+	*) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
 esac
 ARCH=${3-$ARCH}
 
@@ -22,19 +24,19 @@ SYSTEM=${KERNEL}_$ARCH
 
 # Network functions
 if hash curl 2>/dev/null ;then
-  download() { [ "${2-}" ] && curl -\#L "$1" -o "$2"; }
+	download() { [ "${2-}" ] && curl -\#L "$1" -o "$2"; }
 	getstring() { curl -Ls $@; }
 elif hash wget 2>/dev/null ;then
-  download() { [ "${2-}" ] && wget "$1" -O "$2"; }
+	download() { [ "${2-}" ] && wget "$1" -O "$2"; }
 	getstring() { wget -qO- $@; }
 else
-  error 'curl or wget not found' 'you need to install either one of them'
+	error 'curl or wget not found' 'you need to install either one of them'
 fi
 
 usage() {
-  cat <<EOF
-usage: $0 [package] (version) (architecture)
-The application will be installed in ~/.local
+	cat <<EOF
+usage: $0 [package] {version} {architecture}
+The package will be downloaded in \`$DIR\` 
 
 Available packages for $SYSTEM:
 $(getstring $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.*/\1\]/p" | tr _ \[)
@@ -43,26 +45,16 @@ Available architectures:
 [x86-64, x86, armhf, arm64] (default: $ARCH)
 
 EOF
-  exit $1
+	exit $1
 }
 
 case ${1-} in
-  -h|--help|'') usage 0;
+	-h|--help|'') usage 0;
 esac
 
 # Current shell used by the user
-SH=${SHELL##*\/}
-
-# Add $HOME/.local/bin to the path
-local_path() {
-	if ! [ "$(grep -o \$HOME/.local/bin ~/.${SH}rc)" ] ;then
-		mkdir -p ~/.local
-		echo 'PATH="$HOME/.local/bin:$PATH"' >> ~/.${SH}rc
-		echo '$HOME/.local/bin:$PATH is added in your path.'
-		echo "Restart a shell or use:"
-		echo 'export PATH="$HOME/.local/bin:$PATH"'
-	fi
-}
+SH=$0
+SH=${SH##*\/}
 
 sha512sums=$(getstring $MIRROR/SHA512SUMS)
 package=$(printf "$sha512sums\n" | grep -o "$1_${2-.*}_$SYSTEM.tar.xz" || true)
@@ -72,8 +64,6 @@ if ! [ "$package" ] ;then
 	usage 1
 else
 	name=${package%.tar.xz}
-	local_path
-	cd /tmp
 
 	# Very shasum
 	shasum=$(printf "$sha512sums\n "| grep "$package")
@@ -85,7 +75,5 @@ else
 	echo "Extracting..."
 	tar xJf $package
 	rm $package
-	cp -rf $name/* ~/.local
-	rm -rf $name
-	echo "$name installed in $HOME/.local"
+	echo "downloaded: \`$DIR/$name\`"
 fi

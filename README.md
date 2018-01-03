@@ -16,19 +16,22 @@
 
 ## Get the application
 
-You can use the `helper.sh` script that will download and place the application for you in the `~/.local` directory that wipl be added in your $PATH.
+You can use the `helper.sh` script that will download the package in the actual directory.
 
-To print the usage and view available packages:
+`wget https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh -O /tmp/helper.sh`
 
-`wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh | $0 -`
+or
+
+`curl -SL https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh -o /tmp/helper.sh`
 
 When you have chosen a package, replace `$PACKAGE` and install it locally:
 
-`wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh $PACKAGE | $0 -`
+```sh
+sh /tmp/helper.sh                # print the usage and the packages
+sudo sh /tmp/helper.sh $PACKAGE` # download a package
+```
 
-
-You can also use `curl -sL` instead of `wget -qO-`
-
+You can place its subdirectories (e.g. `bin`, `lib`, `share`...) in `/usr/local/` to be reachable g
 
 ## Manual download
 
