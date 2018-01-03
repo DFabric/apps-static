@@ -1,0 +1,23 @@
+deps:
+  static:
+  - gc-dev
+  - libevent-dev
+  - zlib-dev
+  alpine:
+  - g++
+  - gc-dev
+  - llvm
+  - llvm-dev
+  - llvm-libs
+  - llvm-static
+  - libc-dev
+  - libevent-dev
+  - libressl
+  - openssl-dev
+  - yaml-dev
+  - pcre-dev
+  - zlib-dev
+
+version:
+  src: https://github.com/DFabric/dppm/commits/master 
+  regex: (?<=datetime=").*(?=T)
