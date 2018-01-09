@@ -10,7 +10,7 @@ DIR=$PWD
 # Launch on dev mode if you don't wan't to have the clean
 if ! $DEV ;then
   clean() {
-    info "Deleting $DIR"
+    info "Deleting $DIR/* on the container"
     cd $DIR
     # Clean the build directory
     [ "${PACKAGE-}" ] && [ -f $PACKAGE.tar.xz ] && mv $PACKAGE.tar.xz ..
@@ -56,7 +56,6 @@ fi
 [ "${ver-}" ] || error 'ver' 'no version number returned'
 
 # Create the directory
-PKG=${DIR#$BUILDDIR/*}
 PACKAGE=${PKG}_${ver}_$SYSTEM
 mkdir $PACKAGE
 

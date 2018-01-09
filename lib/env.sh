@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Set the environment variables
+CONTAINERDIR=/tmp
 BUILDDIR=${BUILDDIR:-/tmp/apps-static}
 COMPRESS=${COMPRESS:-true}
 DEV=${DEV:-false}
@@ -18,7 +19,7 @@ case $(uname -m) in
 	i*86) ARCH=x86;;
 	aarch64) ARCH=arm64;;
 	armv7*) ARCH=armhf;;
-  *) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
+	*) printf "Error: $(uname -m) - unsupported architecture\n"; usage 1;;
 esac
 
 SYSTEM=${KERNEL}_$ARCH

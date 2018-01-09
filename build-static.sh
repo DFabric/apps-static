@@ -116,9 +116,9 @@ docker pull $DARCH/alpine
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
 sh lib/main.sh"
-  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$PKGDIR -w $PKGDIR -e DEV=true $DARCH/alpine $qemu /bin/sh
+  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG -e DEV=true $DARCH/alpine $qemu /bin/sh
 else
-  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$PKGDIR -w $PKGDIR $DARCH/alpine $qemu /bin/sh lib/main.sh || true
+  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG $DARCH/alpine $qemu /bin/sh lib/main.sh || true
 
   package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_$ARCH*) \
   || { error "Build not found" "Your build is staying at $PKGDIR"; exit 1; }
