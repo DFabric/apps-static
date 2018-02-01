@@ -131,6 +131,7 @@ else
     info "Your build is now at '$DIR/build/$package'"
     rm -rf $PKGDIR
     cd $DIR/build
+    sed -i "/.*${PKG}_.*_${KERNEL}_$ARCH.*/d" SHA512SUMS 2>/dev/null
     sha512sum $package >> SHA512SUMS
   else
     error "$PKGDIR/$package" "an error occured when moving  to $DIR/build!\
