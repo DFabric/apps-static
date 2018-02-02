@@ -48,11 +48,20 @@ fi
 PKG=$1
 qemu=
 QEMU_EXECVE=
-PKGDIR=$BUILDDIR/$PKG
 
 case ${2-} in
   *,*) parsearch $2;;
 esac
+
+# Translate build arch to their Docker's equivalent
+case ${2-$ARCH} in
+  arm64) DARCH=arm64v8;;
+  armhf) DARCH=armhf;;
+  x86-64) DARCH=amd64;;
+  x86) DARCH=i386;;
+  *) error "${2-$ARCH}" 'unsupported architecture';;
+esac
+PKGDIR=$BUILDDIR/$PKG/${2-$ARCH}
 
 # Check build directory
 mkdir -p $PKGDIR
@@ -68,8 +77,7 @@ elif [ "${2-}" ] && [ "$ARCH" != x86-64 ] && [ "$ARCH" != "$2" ] ;then
   error "$ARCH" "only x86_64 can cross compile."
 
 elif [ "${2-}" ] && [ "${2-}" != "$ARCH" ] ;then
-  ARCH=${2-$ARCH}
-  PKGDIR=$BUILDDIR/$PKG
+  ARCH=$2
   case $ARCH in
     arm64) qemu=qemu-arm64-static_linux_x86-64;;
     armhf) qemu=qemu-armhf-static_linux_x86-64;;
@@ -97,35 +105,27 @@ elif [ "${2-}" ] && [ "${2-}" != "$ARCH" ] ;then
 
   QEMU_EXECVE="-e QEMU_EXECVE=1 -v $BUILDDIR/$qemu:/usr/bin/$qemu"
 fi
-ARCH=${2-$ARCH}
-
-# Translate build arch to their Docker's equivalent
-case $ARCH in
-  arm64) DARCH=arm64v8;;
-  armhf) DARCH=armhf;;
-  x86-64) DARCH=amd64;;
-  x86) DARCH=i386;;
-  *) error "$ARCH" 'unsupported architecture';;
-esac
 
 # Copy on the build directory
 cp -r $DIR/source/$PKG/* $PKGDIR
 cp -r $DIR/lib $PKGDIR
 
-docker pull $DARCH/alpine
+docker pull $DARCH/alpine:$DTAG
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
 sh lib/main.sh"
-  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG -e DEV=true $DARCH/alpine $qemu /bin/sh
+  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG -e DEV=true $DARCH/alpine:$DTAG $qemu /bin/sh
 else
-  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG $DARCH/alpine $qemu /bin/sh lib/main.sh || true
+  docker run -it --rm $QEMU_EXECVE -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG $DARCH/alpine:$DTAG $qemu /bin/sh lib/main.sh || true
 
-  package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_$ARCH*) \
-  || { error "Build not found" "Your build is staying at $PKGDIR"; exit 1; }
+  package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_$ARCH*) || {
+    error "build not found" "build directory staying at $PKGDIR"
+    exit 1
+  }
 
   if [ "$package" ] && [ -d build/$package ] ;then
      error "$DIR/build/$package" "the file already exist!\
- Your build is staying at $PKGDIR"
+     build staying at $PKGDIR"
      exit 1
   elif [ "$package" ] && mv -n "$PKGDIR/$package" "$DIR/build" ;then
     info "Your build is now at '$DIR/build/$package'"
