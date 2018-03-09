@@ -1,0 +1,19 @@
+deps:
+  static:
+  - zlib-dev
+  alpine:
+  - g++
+  - gdbm-dev
+  - libffi-dev
+  - libc-dev
+  - libressl
+  - make
+  - linux-headers
+  - openssl-dev
+  - readline-dev
+  - pcre-dev
+  - yaml-dev
+
+version:
+  src: https://www.ruby-lang.org/en/downloads/releases/
+  regex: (?<=Ruby )[0-9.]+(?=<)
