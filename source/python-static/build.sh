@@ -5,7 +5,7 @@ wget -qO- https://www.python.org/ftp/python/$ver/Python-$ver.tar.xz | tar xJf -
 cd Python-$ver
 
 ./configure LDFLAGS=-static \
-  --prefix=$DIR/$PACKAGE \
+  --prefix='/' \
   --enable-optimizations \
   --enable-ipv6 \
   --with-computed-gotos \
