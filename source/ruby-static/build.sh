@@ -17,14 +17,14 @@ export INSTALL=install
 export ac_cv_func_isnan=yes
 export ac_cv_func_isinf=yes
 
-./configure \
+./configure LDFLAGS=-static \
   --prefix='/' \
   --with-static-linked-ext \
   --enable-static \
-  --enable-pthread \
+  --enable-threads \
   --disable-shared \
   --disable-install-doc \
   --disable-rpath \
   --with-gdbm
 
-make -j$nproc DESTDIR="$DIR/$PACKAGE" install
+make -j$nproc LDFLAGS=-static DESTDIR="$DIR/$PACKAGE" install

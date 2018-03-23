@@ -9,7 +9,7 @@ deps:
   - libressl
   - make
   - linux-headers
-  - openssl-dev
+  - libressl-dev
   - readline-dev
   - pcre-dev
   - yaml-dev
