@@ -18,15 +18,17 @@
 
 You can use the `helper.sh` script that will download the package in the actual directory.
 
-`wget https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh -O /tmp/helper.sh` or `curl -SL https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh -o /tmp/helper.sh`
+`wget -qO-` can be replaced by `curl -s`
 
-To list available applications and print the help:
+To list available packages:
 
-`sh /tmp/helper.sh`
+`wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh`
 
-When you have chosen a package, replace `$PACKAGE` and install it locally:
+Change `${PACKAGE}` by your chosen package.
 
-`sh /tmp/helper.sh $PACKAGE`
+To download the `${PACKAGE}` in the current directory:
+
+`sh -c "APP=${PACKAGE} $(wget -qO- https://raw.githubusercontent.com/DFabric/apps-static/master/helper.sh)"`
 
 You can place its subdirectories (e.g. `bin`, `lib`, `share`...) in `/usr/local/` to be reachable globally, or directly use the binnary in `bin`.
 
@@ -37,8 +39,6 @@ Simply download and extract the archive of the application. The path can be `/us
 Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/packages/downloads/)
 
 `wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.xz | tar xJf -`
-
-You can also use `curl -sL` instead of `wget -qO-`
 
 A `$PACKAGE` folder will be created.
 

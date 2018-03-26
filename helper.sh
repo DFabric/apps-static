@@ -2,7 +2,7 @@
 set -eu
 
 # Current directory
-DIR=$PWD/$(dirname $0)
+DIR=$(dirname $0)
 cd $DIR
 
 # Must match lib/env.sh
@@ -10,6 +10,8 @@ MIRROR=https://bitbucket.org/dfabric/packages/downloads
 
 DIR=$PWD
 KERNEL=$(uname -s | tr A-Z a-z)
+
+APP=${APP-${1-}}
 
 case $(uname -m) in
 	x86_64) ARCH=x86-64;;
@@ -48,7 +50,7 @@ EOF
 	exit $1
 }
 
-case ${1-} in
+case $APP in
 	-h|--help|'') usage 0;
 esac
 
@@ -57,7 +59,7 @@ SH=$0
 SH=${SH##*\/}
 
 sha512sums=$(getstring $MIRROR/SHA512SUMS)
-package=$(printf "$sha512sums\n" | grep -o "$1_${2-.*}_$SYSTEM.tar.xz" || true)
+package=$(printf "$sha512sums\n" | grep -o "${APP}_${2-.*}_$SYSTEM.tar.xz" || true)
 
 if ! [ "$package" ] ;then
 	echo "$1 package not found in $MIRROR"
