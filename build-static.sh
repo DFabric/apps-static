@@ -56,7 +56,7 @@ esac
 # Translate build arch to their Docker's equivalent
 case ${2-$ARCH} in
   arm64) DARCH=arm64v8;;
-  armhf) DARCH=armhf;;
+  armhf) DARCH=arm32v6;;
   x86-64) DARCH=amd64;;
   x86) DARCH=i386;;
   *) error "${2-$ARCH}" 'unsupported architecture';;
