@@ -4,13 +4,13 @@ deps:
   - icu-dev
   - libxml2-dev
   - libxslt-dev
-  - libevent-dev
   - sqlite-dev
-  - zlib-dev
   alpine:
   - apr-dev
   - apr-util-dev
   - aspell-dev
+  - autoconf
+  - bison
   - bzip2-dev
   - db-dev
   - enchant-dev
@@ -34,8 +34,7 @@ deps:
   - openldap-dev
   - readline-dev
   - unixodbc-dev
-  - autoconf
-  - bison
+  - zlib-dev
 
 version:
   src: http://docs.php.net/downloads.php

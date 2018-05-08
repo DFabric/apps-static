@@ -1,4 +1,4 @@
-#:/bin/sh
+#!/bin/sh
 set -eu
 
 cd $(pwd)/$(dirname $0)
@@ -33,8 +33,8 @@ esac
 for pkg in $packages ;do
   latestver=$(regexlook -w "$(readyaml -f source/${pkg%_*}/pkg.yml version regex)" "$(readyaml -f source/${pkg%_*}/pkg.yml version src)"| head -1)
   case $latestver in
-    ${pkg#*_}) printf '%b' "\33[5;32m${pkg%_*}: ${pkg#*_} is the latest\33[0m\n";;
-    *rc*|*beta*) printf '%b' "\33[5;33m${pkg%_*}: $latestver is available but doesn't appear to be a stable release\33[0m\n";;
-    *) printf '%b' "\33[5;31m${pkg%_*}: $latestver available (current ${pkg#*_})\33[0m\n";;
+    ${pkg#*_}) printf '%b' "\33[0;32m${pkg%_*}: ${pkg#*_} is the latest\33[0m\n";;
+    *rc*|*beta*) printf '%b'  "\33[0;33m${pkg%_*}: $latestver is available but doesn't appear to be a stable release\33[0m\n";;
+    *) printf '%b' "\33[0;31m${pkg%_*}: $latestver available (current ${pkg#*_})\33[0m\n";;
   esac
 done

@@ -1,6 +1,4 @@
 deps:
-  static:
-  - zlib-dev
   alpine:
   - autoconf
   - automake
@@ -13,7 +11,9 @@ deps:
   - libtool
   - linux-headers
   - make
+  - pixman-dev
   - python2
+  - zlib-dev
 
 version:
   src: https://download.qemu.org/?C=N;O=D

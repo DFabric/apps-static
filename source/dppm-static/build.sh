@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Install crystal
-echo http://public.portalier.com/alpine/testing >> /etc/apk/repositories
-wget http://public.portalier.com/alpine/julien%40portalier.com-56dab02e.rsa.pub -O /etc/apk/keys/julien@portalier.com-56dab02e.rsa.pub
-apk add --update crystal shards
-
 wget -qO- https://github.com/DFabric/dppm/tarball/master | tar xzf -
 
 # Prepare directories

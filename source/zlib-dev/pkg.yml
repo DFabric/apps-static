@@ -1,9 +1,0 @@
-deps:
-  alpine:
-  - g++
-  - libressl
-  - make
-
-version:
-  src: https://zlib.net
-  regex: (?<=zlib ).*(?=</B)

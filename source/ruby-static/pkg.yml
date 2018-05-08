@@ -1,6 +1,4 @@
 deps:
-  static:
-  - zlib-dev
   alpine:
   - g++
   - gdbm-dev
@@ -13,6 +11,7 @@ deps:
   - readline-dev
   - pcre-dev
   - yaml-dev
+  - zlib-dev
 
 version:
   src: https://www.ruby-lang.org/en/downloads/releases/

@@ -1,11 +1,10 @@
 deps:
-  static:
-  - zlib-dev
   alpine:
   - g++
   - libressl
   - make
   - python2-dev
+  - zlib-dev
 
 version:
   src: https://git.gnome.org/browse/libxml2/refs/

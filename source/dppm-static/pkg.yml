@@ -1,9 +1,6 @@
 deps:
-  static:
-  - gc-dev
-  - libevent-dev
-  - zlib-dev
   alpine:
+  - crystal
   - g++
   - gc-dev
   - llvm
@@ -14,6 +11,7 @@ deps:
   - libevent-dev
   - libressl
   - openssl-dev
+  - shards
   - yaml-dev
   - pcre-dev
   - zlib-dev

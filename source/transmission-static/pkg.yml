@@ -1,7 +1,6 @@
 deps:
   static:
   - curl-static
-  - libevent-dev
   alpine:
   - automake
   - autoconf
@@ -10,6 +9,7 @@ deps:
   - libressl-dev
   - make
   - intltool
+  - libevent2-dev
   - libssh2-dev
   - tar
   - xz

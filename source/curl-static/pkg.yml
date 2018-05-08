@@ -1,12 +1,11 @@
 deps:
-  static:
-  - zlib-dev
   alpine:
   - g++
   - libressl
   - libressl-dev
   - libssh2-dev
   - make
+  - zlib-dev
 
 version:
   src: https://curl.haxx.se/download/?C=M;O=D
