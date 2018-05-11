@@ -9,7 +9,7 @@ deps:
   - libressl-dev
   - make
   - intltool
-  - libevent2-dev
+  - libevent-dev
   - libssh2-dev
   - tar
   - xz

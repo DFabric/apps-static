@@ -14,10 +14,5 @@ sed -i 's/ $LDFLAGS / -static /g' configure
   --with-inotify \
   --enable-cli
 
-# Patch to build with libressl-dev
-cd libtransmission
-patch < $DIR/libressl.patch
-cd ..
-
 # Build & install to /usr/local
 make -j$nproc LDFLAGS=-all-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install-strip
