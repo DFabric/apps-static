@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -eu
 
 # Current directory
@@ -81,6 +80,11 @@ cp -r $DIR/lib $PKGDIR
 
 docker pull $docker_image
 
+delete_build() {
+  rm -r $PKGDIR
+  info "build directory $PKGDIR deleted"
+}
+
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
 sh lib/main.sh"
@@ -88,24 +92,25 @@ sh lib/main.sh"
 else
   docker run -it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG $docker_image /bin/sh lib/main.sh || true
 
-  package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_$ARCH*) || {
-    error "build not found" "build directory staying at $PKGDIR"
+  package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_${2-$ARCH}*) || {
+    error "$PKGDIR" "build not found"
+    delete_build
     exit 1
   }
 
   if [ "$package" ] && [ -d build/$package ] ;then
-     error "$DIR/build/$package" "the file already exist!\
-     build staying at $PKGDIR"
-     exit 1
+    error "$DIR/build/$package" "file already existing"
+    delete_build
+    exit 1
   elif [ "$package" ] && mv -n "$PKGDIR/$package" "$DIR/build" ;then
     info "Your build is now at '$DIR/build/$package'"
-    rm -rf $PKGDIR
+    delete_build
     cd $DIR/build
     sed -i "/.*${PKG}_.*_${KERNEL}_$ARCH.*/d" SHA512SUMS 2>/dev/null
     sha512sum $package >> SHA512SUMS
   else
-    error "$PKGDIR/$package" "an error occured when moving  to $DIR/build!\
- Your build is staying at $PKGDIR/$package"
+    error "$PKGDIR/$package" "an error occured when moving to $DIR/build"
+    delete_build
     exit 1
   fi
 fi

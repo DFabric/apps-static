@@ -2,7 +2,6 @@ deps:
   static:
   - curl-static
   - icu-dev
-  - libxml2-dev
   - libxslt-dev
   - sqlite-dev
   alpine:
@@ -28,6 +27,8 @@ deps:
   - libressl-dev
   - libssh2-dev
   - libtool
+  - libxml2-dev
+  - libxslt-dev
   - make
   - mariadb-dev
   - net-snmp-dev
