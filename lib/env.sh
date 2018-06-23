@@ -6,7 +6,7 @@ BUILDDIR=${BUILDDIR-/tmp/apps-static}
 COMPRESS=${COMPRESS-true}
 DEV=${DEV-false}
 QEMU_EXECVE=${QEMU_EXECVE-}
-DTAG=${DTAG-latest}
+DTAG=${DTAG-edge}
 
 # Contain library archives and SHA512SUMS
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
