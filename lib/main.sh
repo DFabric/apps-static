@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+sed -i "s/v3.7/edge/" /etc/apk/repositories
+
 # Loading environment variables
 . lib/env.sh
 
