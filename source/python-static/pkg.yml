@@ -15,4 +15,4 @@ deps:
 
 version:
   src: https://docs.python.org/3/
-  regex: (?<=')3.*(?=',)
+  regex: (?<=title>)3.*(?= Documentation)

@@ -11,7 +11,7 @@ mkdir -p build
 
 usage() {
   cat <<EOF
-usage: $0 [package] (arch)
+usage: $0 PACKAGE ARCHITECTURES...
 
 Available packages:
 $(ls -1 source)
@@ -51,7 +51,7 @@ case ${2-} in
 esac
 
 PKGDIR=$BUILDDIR/$PKG/${2-$ARCH}
-docker_image=amd64/alpine:$DTAG
+docker_image=alpine:$DTAG
 
 # Check build directory
 mkdir -p $PKGDIR

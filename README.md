@@ -48,6 +48,14 @@ The binaries you will need are likely to be in the `bin` folder, but other locat
 
 You will need to have [Docker](https://www.docker.com/) installed. An Alpine Linux image is used for the build environment.
 
+To build a package:
+
+`./build-static PACKAGE ARCHITECTURES...`
+
+For example:
+
+`./build-static dppm-static x86-64,arm64,armhf`
+
 The sources used for the builds are available in the `source` directory.
 
 Each program/library have its own `pkg.yml` description file that have:
@@ -73,4 +81,4 @@ This project is designed to be easily ported to support BSD, Darwin, NT kernels 
 
 ## License
 
-Copyright (c) 2017 Julien Reichardt - ISC License
+Copyright (c) 2017-2018 Julien Reichardt - ISC License
