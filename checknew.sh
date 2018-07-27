@@ -3,14 +3,10 @@ set -eu
 
 cd $(pwd)/$(dirname $0)
 
-. ./lib/env.sh
-
-packages=$(wget -qO- $MIRROR/SHA512SUMS | sed -n "s/.*  \(.*\)_$SYSTEM.*/\1/p")
-
 usage() {
   cat <<EOF
 usage: $0 (package) (architecture)
-Check for new available packages versions for $SYSTEM:
+Check for new available packages versions.
 
 Available packages:
 $packages
@@ -27,14 +23,28 @@ case ${1-} in
 esac
 
 # Libraries
+. lib/env.sh
 . lib/regexlook.sh
 . lib/readyaml.sh
 
-for pkg in $packages ;do
-  latestver=$(regexlook -w "$(readyaml -f source/${pkg%_*}/pkg.yml version regex)" "$(readyaml -f source/${pkg%_*}/pkg.yml version src)"| head -1)
-  case $latestver in
-    ${pkg#*_}) printf '%b' "\33[0;32m${pkg%_*}: ${pkg#*_} is the latest\33[0m\n";;
-    *rc*|*beta*) printf '%b'  "\33[0;33m${pkg%_*}: $latestver is available but doesn't appear to be a stable release\33[0m\n";;
-    *) printf '%b' "\33[0;31m${pkg%_*}: $latestver available (current ${pkg#*_})\33[0m\n";;
-  esac
+PACKAGES=$(wget -qO- $MIRROR/SHA512SUMS)
+
+eval_version() {
+  latest_ver=$(regexlook -w "$(readyaml -f source/$1/pkg.yml version regex)" "$(readyaml -f source/$1/pkg.yml version src)"| head -1)
+  printf '%b' "\33[1;36m$1 - latest: $latest_ver\33[0m\n"
+  echo "$PACKAGES" | sed -n "s/.*  $1_\(.*\)\.tar\.xz/\1/p" | while read line ;do
+    version=${line%%_*}
+    case $latest_ver in
+      $version) printf '%b' "\33[0;32m${line#*_}: $version (latest)\33[0m\n";;
+      *rc*|*beta*) printf '%b'  "\33[0;33m${line#*_}: $latest_ver (latest stable)\33[0m\n";;
+      *) printf '%b' "\33[0;31m${line#*_}: $version (previous)\33[0m\n";;
+    esac
+  done
+}
+
+IFS='
+'
+for pkg in source/* ;do
+  eval_version ${pkg#*/}
 done
+
