@@ -14,5 +14,6 @@ cd Python-$ver
   --without-ensurepip
 
 cp ../Setup.local Modules/Setup.local
+[ "$ARCH" = arm64 ] && sed -i '/-DASM/d' Modules/Setup.local
 
 make -j$nproc LDFLAGS=-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install

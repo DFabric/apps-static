@@ -29,8 +29,6 @@ info 'Installing system depencies'
 apk add --update $(readyaml -f pkg.yml deps alpine)
 
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
-  # bring ssl_helper - needed for HTTPS
-  apk add --update libressl
   info 'Installing static libraries dependencies'
   sha512sums=$(wget -qO- $MIRROR/SHA512SUMS)
   for dep in $(readyaml -f pkg.yml deps static) ;do
