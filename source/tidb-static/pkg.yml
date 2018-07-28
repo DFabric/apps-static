@@ -1,0 +1,10 @@
+deps:
+  alpine:
+  - git
+  - go
+  - make
+  - musl-dev
+
+version:
+  src: https://github.com/pingcap/tidb
+  regex: (?<=data-name="v)[0-9.]+(?=")

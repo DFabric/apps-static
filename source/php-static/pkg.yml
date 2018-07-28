@@ -2,7 +2,6 @@ deps:
   static:
   - curl-static
   - icu-dev
-  - libxslt-dev
   - sqlite-dev
   alpine:
   - apr-dev
