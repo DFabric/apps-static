@@ -17,7 +17,7 @@ Available packages:
 $(ls -1 source)
 
 Available architectures:
-[x86-64, x86, armhf, arm64] (default: $ARCH)
+[x86-64,x86,armhf,arm64] (default: $ARCH)
 - can be a comma-separated list
 
 EOF
@@ -102,12 +102,14 @@ else
     error "$DIR/build/$package" "file already existing"
     delete_build
     exit 1
-  elif [ "$package" ] && mv -n "$PKGDIR/$package" "$DIR/build" ;then
+  elif [ "$package" ] && mv -f "$PKGDIR/$package" "$DIR/build" ;then
     info "Your build is now at '$DIR/build/$package'"
     delete_build
     cd $DIR/build
-    sed -i "/.*${PKG}_.*_${KERNEL}_$ARCH.*/d" SHA512SUMS 2>/dev/null
+    touch SHA512SUMS
+    sed -i "/.*${PKG}_.*_${KERNEL}_${2-$ARCH}\.tar\.xz/d" SHA512SUMS
     sha512sum $package >> SHA512SUMS
+    sort -k2 SHA512SUMS -o SHA512SUMS
   else
     error "$PKGDIR/$package" "an error occured when moving to $DIR/build"
     delete_build

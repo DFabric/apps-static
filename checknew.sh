@@ -12,7 +12,7 @@ Available packages:
 $packages
 
 Available architectures:
-[x86-64, x86, armhf, arm64] (default: $ARCH)
+[x86-64,x86,arm64,armhf] (default: $ARCH)
 
 EOF
   exit $1
@@ -31,7 +31,7 @@ PACKAGES=$(wget -qO- $MIRROR/SHA512SUMS)
 
 eval_version() {
   latest_ver=$(regexlook -w "$(readyaml -f source/$1/pkg.yml version regex)" "$(readyaml -f source/$1/pkg.yml version src)"| head -1)
-  printf '%b' "\33[1;36m$1 - latest: $latest_ver\33[0m\n"
+  printf '%b' "\33[1;36m$1: $latest_ver [latest]\33[0m\n"
   echo "$PACKAGES" | sed -n "s/.*  $1_\(.*\)\.tar\.xz/\1/p" | while read line ;do
     version=${line%%_*}
     case $latest_ver in
