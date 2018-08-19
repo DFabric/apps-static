@@ -1,6 +1,4 @@
 deps:
-  static:
-  - sqlite-dev
   alpine:
   - bzip2-dev
   - g++
@@ -10,6 +8,8 @@ deps:
   - libressl-dev
   - linux-headers
   - make
+  - sqlite-dev
+  - sqlite-static
   - xz-dev
   - zlib-dev
 

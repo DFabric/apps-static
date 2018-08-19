@@ -1,8 +1,6 @@
 deps:
   static:
   - curl-static
-  - icu-dev
-  - sqlite-dev
   alpine:
   - apr-dev
   - apr-util-dev
@@ -18,6 +16,7 @@ deps:
   - g++
   - gdbm-dev
   - gmp-dev
+  - icu-dev
   - libevent-dev
   - libgcrypt-dev
   - libjpeg-turbo-dev
@@ -33,6 +32,8 @@ deps:
   - net-snmp-dev
   - openldap-dev
   - readline-dev
+  - sqlite-dev
+  - sqlite-static
   - unixodbc-dev
   - zlib-dev
 

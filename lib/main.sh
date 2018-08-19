@@ -27,6 +27,7 @@ fi
 # Alpine dependencies
 info 'Installing system depencies'
 apk add --update $(readyaml -f pkg.yml deps alpine)
+[ $COMPRESS ] && apk add xz
 
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   info 'Installing static libraries dependencies'
@@ -73,7 +74,6 @@ if ! $DEV ;then
   if $COMPRESS && [ -f build/$PACKAGE.tar.xz ] ;then
     error "$DIR/build/$PACKAGE.tar.xz" "the file already exist!"
   elif $COMPRESS ;then
-    apk add --update xz
     info "Compressing $PACKAGE..."
     tar cJf $PACKAGE.tar.xz $PACKAGE
     rm -rf "$PACKAGE"
