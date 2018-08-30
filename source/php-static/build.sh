@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wget -qO- docs.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
+wget -qO- https://secure.php.net/get/php-$ver.tar.xz/from/this/mirror | tar xJf -
 cd php-$ver
 
 ln -s /usr/include/libxml2/libxml/ /usr/include/libxml

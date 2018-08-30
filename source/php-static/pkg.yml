@@ -38,5 +38,5 @@ deps:
   - zlib-dev
 
 version:
-  src: http://docs.php.net/downloads.php
+  src: https://secure.php.net/downloads.php
   regex: (?<=id="v)7.*(?=" )
