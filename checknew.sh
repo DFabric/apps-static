@@ -27,7 +27,7 @@ esac
 . lib/regexlook.sh
 . lib/readyaml.sh
 
-PACKAGES=$(wget -qO- $MIRROR/SHA512SUMS)
+PACKAGES=$(getstring $MIRROR/SHA512SUMS)
 
 eval_version() {
   latest_ver=$(regexlook -w "$(readyaml -f source/$1/pkg.yml version regex)" "$(readyaml -f source/$1/pkg.yml version src)"| head -1)
@@ -35,9 +35,9 @@ eval_version() {
   echo "$PACKAGES" | sed -n "s/.*  $1_\(.*\)\.tar\.xz/\1/p" | while read line ;do
     version=${line%%_*}
     case $latest_ver in
-      $version) printf '%b' "\33[0;32m${line#*_}: $version (latest)\33[0m\n";;
-      *rc*|*beta*) printf '%b'  "\33[0;33m${line#*_}: $latest_ver (latest stable)\33[0m\n";;
-      *) printf '%b' "\33[0;31m${line#*_}: $version (previous)\33[0m\n";;
+      $version) printf '%b' "\33[0;32m${line#*_}: $version (latest stable)\33[0m\n";;
+      *rc*|*beta*) printf '%b'  "\33[0;33m${line#*_}: $version (rc/beta available)\33[0m\n";;
+      *) printf '%b' "\33[0;31m${line#*_}: $version (update available)\33[0m\n";;
     esac
   done
 }
