@@ -1,10 +1,9 @@
 #!/bin/sh
 
-wget -qO- https://github.com/DFabric/dppm/tarball/master | tar xzf -
-
 # Prepare directories
+git clone https://github.com/DFabric/dppm
 mkdir $PACKAGE/bin
-cd DFabric-dppm-*
+cd dppm
 
 # Install libraries
 shards install

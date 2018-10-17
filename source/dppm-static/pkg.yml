@@ -2,6 +2,7 @@ deps:
   alpine:
   - crystal
   - gc-dev
+  - git
   - llvm
   - llvm-dev
   - llvm-libs
