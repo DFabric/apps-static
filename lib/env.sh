@@ -5,7 +5,10 @@ CONTAINERDIR=/tmp
 BUILDDIR=${BUILDDIR-/tmp/apps-static}
 COMPRESS=${COMPRESS-true}
 DEV=${DEV-false}
-DTAG=${DTAG-edge}
+# Docker image tag
+DTAG=${DTAG-latest}
+# Multiarch image tag
+MATAG=${MATAG-latest-stable}
 
 # Contain library archives and SHA512SUMS
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
@@ -28,4 +31,4 @@ SYSTEM=${KERNEL}_$ARCH
 # Output
 info() { printf '%b\n' "\33[1;33mINFO\33[0m \33[1;39m$0\33[0m $1"; }
 
-error() { printf '%b\n' "\33[1;31mERR!\33[0m \33[1;39m$0\33[0m '$1' - $2" >&2; exit 1; }
+error() { printf '%b\n' "\33[1;31mERR!\33[0m \33[1;39m$0\33[0m $1: $2" >&2; exit 1; }

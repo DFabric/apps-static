@@ -34,7 +34,7 @@ parsearch() {
 }
 
 case ${1-} in
-  -h|--help|'') usage 0;
+  -h|--help|'') usage 0;;
 esac
 
 
@@ -48,10 +48,10 @@ PKG=$1
 
 case ${2-} in
   *,*) parsearch $2;;
+  aarch64) error 'invalid arch, aarch64' 'do you mean `arm64`?';;
 esac
 
 PKGDIR=$BUILDDIR/$PKG/${2-$ARCH}
-docker_image=alpine:$DTAG
 
 # Check build directory
 mkdir -p $PKGDIR
@@ -68,10 +68,12 @@ elif [ "${2-}" ] && [ "$ARCH" != x86-64 ] && [ "$ARCH" != "$2" ] ;then
 
 # https://github.com/multiarch/alpine
 elif [ "${2-}" ] && [ "${2-}" != "$ARCH" ] ;then
-  docker_image=multiarch/alpine:$2-$DTAG
+  docker_image=multiarch/alpine:$2-$MATAG
   # configure binfmt-support on the Docker host
   docker pull multiarch/qemu-user-static:register
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
+else
+  docker_image=alpine:$DTAG
 fi
 
 # Copy to the build directory
