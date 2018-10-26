@@ -1,6 +1,7 @@
 deps:
   alpine:
   - crystal
+  - g++
   - gc-dev
   - git
   - llvm
@@ -8,7 +9,6 @@ deps:
   - llvm-libs
   - llvm-static
   - libevent-dev
-  - libressl
   - libunwind-dev
   - musl-dev
   - openssl-dev
