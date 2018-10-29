@@ -60,7 +60,7 @@ mkdir -p $PKGDIR
 
 # No need of Qemu to run x86 on x86-64
 if [ "${2-}" = x86 ] && [ "$ARCH" = x86-64 ]; then
-  docker_image=x86/alpine:$DTAG
+  docker_image=i386/alpine:$DTAG
 
 # Only x86_64 can cross-compile - for now
 elif [ "${2-}" ] && [ "$ARCH" != x86-64 ] && [ "$ARCH" != "$2" ] ;then
