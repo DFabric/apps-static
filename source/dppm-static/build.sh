@@ -7,6 +7,7 @@ cd dppm
 
 # Install libraries
 shards install
+crystal spec -p
 
 # Static build fix
 cat >> src/dppm.cr <<EOF
