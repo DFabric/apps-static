@@ -26,7 +26,7 @@ fi
 
 # Alpine dependencies
 info 'Installing system depencies'
-apk add --update $(readyaml -f pkg.yml deps alpine) $([ $COMPRESS ] && printf xz)
+apk add --update ca-certificates openssl wget $(readyaml -f pkg.yml deps alpine) $([ $COMPRESS ] && printf xz)
 
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   info 'Installing static libraries dependencies'

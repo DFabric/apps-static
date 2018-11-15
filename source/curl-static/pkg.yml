@@ -1,8 +1,7 @@
 deps:
   alpine:
   - g++
-  - libressl
-  - libressl-dev
+  - openssl-dev
   - libssh2-dev
   - make
   - zlib-dev

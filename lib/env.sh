@@ -17,6 +17,12 @@ MIRROR=https://bitbucket.org/dfabric/packages/downloads
 nproc=$(grep processor /proc/cpuinfo | wc -l)
 KERNEL=$(uname -s | tr A-Z a-z)
 
+# Multiarch image tag
+case $DTAG in
+	edge)     MATAG=edge;;
+	*|latest) MATAG=latest-stable;;
+esac
+
 case $(uname -m) in
 	x86_64) ARCH=x86-64;;
 	i*86) ARCH=x86;;

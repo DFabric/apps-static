@@ -13,16 +13,17 @@ deps:
   - expat-dev
   - freetds-dev
   - freetype-dev
+  - freetype-static
   - g++
   - gdbm-dev
   - gmp-dev
   - icu-dev
   - libevent-dev
   - libgcrypt-dev
+  - libgd
   - libjpeg-turbo-dev
   - libmcrypt-dev
   - libpng-dev
-  - libressl-dev
   - libssh2-dev
   - libtool
   - libxml2-dev
@@ -31,8 +32,8 @@ deps:
   - mariadb-dev
   - net-snmp-dev
   - openldap-dev
+  - openssl-dev
   - readline-dev
-  - sqlite-dev
   - sqlite-static
   - unixodbc-dev
   - zlib-dev
