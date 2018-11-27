@@ -11,7 +11,7 @@ deps:
   - libevent-dev
   - libunwind-dev
   - musl-dev
-  - openssl-dev
+  - libressl-dev
   - shards
   - yaml-dev
   - pcre-dev

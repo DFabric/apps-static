@@ -6,9 +6,7 @@ BUILDDIR=${BUILDDIR-/tmp/apps-static}
 COMPRESS=${COMPRESS-true}
 DEV=${DEV-false}
 # Docker image tag
-DTAG=${DTAG-latest}
-# Multiarch image tag
-MATAG=${MATAG-latest-stable}
+DTAG=${DTAG-edge}
 
 # Contain library archives and SHA512SUMS
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
