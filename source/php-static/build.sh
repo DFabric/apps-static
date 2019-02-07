@@ -5,7 +5,7 @@ cd php-$ver
 
 ln -s /usr/include/libxml2/libxml/ /usr/include/libxml
 
-./configure LDFLAGS=-static PHP_LDFLAGS=-all-static LIBS=-lssh2 \
+./configure LDFLAGS=-static PHP_LDFLAGS=-all-static LIBS='-lssh2 -licui18n -licuuc -licudata -ldl -lstdc++' \
 	--prefix='/' \
 	--enable-static \
 	--enable-cgi \
@@ -32,7 +32,8 @@ ln -s /usr/include/libxml2/libxml/ /usr/include/libxml
 	  --with-png-dir \
 	--with-gdbm \
 	--with-iconv \
-	--with-icu-dir \
+	--with-icu-dir=/usr \
+	--enable-json \
 	--enable-mbstring=all \
 	--enable-mysqlnd \
 	  --with-mysqli=mysqlnd \
@@ -65,7 +66,7 @@ ln -s /usr/include/libxml2/libxml/ /usr/include/libxml
 	--with-pdo-dblib \
 	--enable-opcache
 
-make -j$nproc INSTALL_ROOT="$DIR/$PACKAGE"  PHP_LDFLAGS=-all-static
+make -j$nproc INSTALL_ROOT="$DIR/$PACKAGE" PHP_LDFLAGS=-all-static
 make -j$nproc INSTALL_ROOT="$DIR/$PACKAGE" PHP_LDFLAGS=-all-static install
 
 # Strip

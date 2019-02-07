@@ -18,6 +18,7 @@ deps:
   - gdbm-dev
   - gmp-dev
   - icu-dev
+  - icu-static
   - libevent-dev
   - libgcrypt-dev
   - libgd
@@ -28,6 +29,7 @@ deps:
   - libtool
   - libxml2-dev
   - libxslt-dev
+  - libzip-dev
   - make
   - mariadb-dev
   - net-snmp-dev
