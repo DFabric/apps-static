@@ -16,4 +16,4 @@ deps:
 
 version:
   src: https://github.com/transmission/transmission/ref-list/master?source_action=disambiguate&source_controller=files
-  regex: (?<=data-name=")[0-9]\.[0-9][0-9](?=")
+  regex: (?<=title=").*(?=">)

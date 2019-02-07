@@ -7,4 +7,4 @@ deps:
 
 version:
   src: https://github.com/pingcap/tidb/ref-list/master?source_action=disambiguate&source_controller=files
-  regex: (?<=data-name="v)[0-9.]+(?=")
+  regex: (?<=title="v)[0-9.]+(?=">)
