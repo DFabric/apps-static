@@ -13,4 +13,4 @@ cd git-$ver
   NO_SYS_POLL_H=1
 
 # Build & install
-make -j$nproc LDFLAGS=-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install strip
+make -j$(nproc) LDFLAGS=-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install strip

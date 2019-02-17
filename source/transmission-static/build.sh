@@ -15,4 +15,4 @@ sed -i 's/ $LDFLAGS / -static /g' configure
   --enable-cli
 
 # Build & install to /usr/local
-make -j$nproc LDFLAGS=-all-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install-strip
+make -j$(nproc) LDFLAGS=-all-static LINKFORSHARED= DESTDIR="$DIR/$PACKAGE" install-strip

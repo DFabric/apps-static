@@ -12,7 +12,6 @@ DTAG=${DTAG-edge}
 MIRROR=https://bitbucket.org/dfabric/packages/downloads
 
 # System variables
-nproc=$(grep processor /proc/cpuinfo | wc -l)
 KERNEL=$(uname -s | tr A-Z a-z)
 
 # Multiarch image tag

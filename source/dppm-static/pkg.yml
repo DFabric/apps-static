@@ -9,9 +9,8 @@ deps:
   - llvm-libs
   - llvm-static
   - libevent-dev
-  - libunwind-dev
   - musl-dev
-  - libressl-dev
+  - openssl-dev
   - shards
   - yaml-dev
   - pcre-dev

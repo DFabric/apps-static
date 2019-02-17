@@ -27,4 +27,4 @@ export ac_cv_func_isinf=yes
   --disable-rpath \
   --with-gdbm
 
-make -j$nproc LDFLAGS=-static DESTDIR="$DIR/$PACKAGE" install
+make -j$(nproc) LDFLAGS=-static DESTDIR="$DIR/$PACKAGE" install

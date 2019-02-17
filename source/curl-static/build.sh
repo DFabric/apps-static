@@ -12,4 +12,4 @@ cd curl-$ver
   --disable-ldap \
   --with-pic
 
-make V=1 -j$nproc curl_LDFLAGS=-all-static DESTDIR="$DIR/$PACKAGE" install-strip
+make V=1 -j$(nproc) curl_LDFLAGS=-all-static DESTDIR="$DIR/$PACKAGE" install-strip
