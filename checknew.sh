@@ -30,7 +30,7 @@ esac
 PACKAGES=$(getstring $MIRROR/SHA512SUMS)
 
 eval_version() {
-  latest_ver=$(regexlook -w "$(readyaml -f source/$1/pkg.yml version regex)" "$(readyaml -f source/$1/pkg.yml version src)"| head -1)
+  latest_ver=$(regexlook -w "$(readyaml -f source/$1/pkg.yml version regex)" "$(readyaml -f source/$1/pkg.yml version src)"| head -1 | tr - .)
   printf '%b' "\33[1;36m$1: $latest_ver [latest]\33[0m\n"
   echo "$PACKAGES" | sed -n "s/.*  $1_\(.*\)\.tar\.xz/\1/p" | while read line ;do
     version=${line%%_*}

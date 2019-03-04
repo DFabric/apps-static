@@ -51,7 +51,7 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   done
 fi
 
-[ "${ver-}" ] || ver=$(regexlook -w "$(readyaml -f pkg.yml version regex)" "$(readyaml -f pkg.yml version src)" | head -1)
+[ "${ver-}" ] || ver=$(regexlook -w "$(readyaml -f pkg.yml version regex)" "$(readyaml -f pkg.yml version src)" | head -1 | tr - .)
 [ "${ver-}" ] || error 'ver' 'no version number returned'
 
 # Create the directory
