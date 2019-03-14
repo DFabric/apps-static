@@ -36,9 +36,9 @@ You can place its subdirectories (e.g. `bin`, `lib`, `share`...) in `/usr/local/
 
 Simply download and extract the archive of the application. The path can be `/usr` or whatever you want.
 
-Replace `${PACKAGE}` by one of the available [here](https://bitbucket.org/dfabric/packages/downloads/)
+Replace `${PACKAGE}` by one of the available [here](https://bintray.com/dfabric/apps-static/builds#files)
 
-`wget -qO- https://bitbucket.org/dfabric/packages/downloads/${PACKAGE}.tar.xz | tar xJf -`
+`wget -qO- ${URL_PATH} | tar xJf -`
 
 A `$PACKAGE` folder will be created.
 
@@ -67,8 +67,7 @@ The `build-static.sh` list the commands to build the package
 
 Additional files can also be found depending of the needs.
 
-
-The builds are fully reproducible and their sha512 sums are stored in [SHA512SUMS](https://bitbucket.org/dfabric/packages/downloads/SHA512SUMS)
+The builds are reproducible and their hashes are stored in SHA512SUMS.
 
 ## Disclaimers
 

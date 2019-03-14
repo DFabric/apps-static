@@ -6,7 +6,7 @@ DIR=$(dirname $0)
 cd $DIR
 
 # Must match lib/env.sh
-MIRROR=https://bitbucket.org/dfabric/packages/downloads
+MIRROR=https://bintray.com/dfabric/apps-static/download_file?file_path=
 
 DIR=$PWD
 KERNEL=$(uname -s | tr A-Z a-z)
