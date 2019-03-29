@@ -1,0 +1,20 @@
+deps:
+  alpine:
+  - autoconf
+  - automake
+  - gcc
+  - git
+  - go
+  - libpng-dev
+  - libtool
+  - make
+  - musl-dev
+  - nasm
+  - nodejs
+  - npm
+  - zip
+  - zlib-dev
+
+version:
+  src: https://docs.mattermost.com/administration/version-archive.html
+  regex: (?<=Team Edition v)[0-9.]+
