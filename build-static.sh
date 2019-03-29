@@ -87,12 +87,14 @@ delete_build() {
   info "build directory $PKGDIR deleted"
 }
 
+docker_args="-it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG"
+
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
 sh lib/main.sh"
-  docker run -it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG -e DEV=true $docker_image /bin/sh
+  docker run $docker_args -e DEV=true $docker_image /bin/sh
 else
-  docker run -it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG $docker_image /bin/sh lib/main.sh || true
+  docker run $docker_args -e PKG=$PKG $docker_image /bin/sh lib/main.sh || true
 
   package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_${2-$ARCH}*) || {
     error "$PKGDIR" "build not found"
