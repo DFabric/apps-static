@@ -1,0 +1,21 @@
+deps:
+  alpine:
+  - cmake
+  - g++
+  - gcc
+  - gmp-dev
+  - irrlicht-dev
+  - irrlicht-static
+  - jsoncpp-dev
+  - jsoncpp-static
+  - luajit-dev
+  - make
+  - musl-dev
+  - openssl-dev
+  - sqlite-dev
+  - sqlite-static
+  - zlib-dev
+
+version:
+  src: https://github.com/minetest/minetest/ref-list/master?source_action=disambiguate&source_controller=files
+  regex: (?<=title=")[0-9.]+(?=">)
