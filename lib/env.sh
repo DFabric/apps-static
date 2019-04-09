@@ -9,7 +9,7 @@ DEV=${DEV-false}
 DTAG=${DTAG-edge}
 
 # Contain library archives and SHA512SUMS
-MIRROR=https://bitbucket.org/dfabric/packages/downloads
+MIRROR=https://bintray.com/dfabric/apps-static/download_file?file_path=
 
 # System variables
 KERNEL=$(uname -s | tr A-Z a-z)

@@ -36,7 +36,7 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     info "Installing $dep"
     match="${dep}_.*_$SYSTEM.tar.xz"
     package=$(printf '%b' "$sha512sums\n" | grep -om1 "$match") || error "no package match" "$match"
-    wget "$MIRROR/$package"
+    wget "$MIRROR/$package" -O $package
 
     # Verify shasum
     case $(printf "$sha512sums\n "| grep "$package") in
