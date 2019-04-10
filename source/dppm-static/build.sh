@@ -9,6 +9,5 @@ cd dppm
 shards install
 crystal spec -p
 
-crystal build --progress --threads $(nproc) --release --static --no-debug src/dppm.cr -o ../$PACKAGE/bin/dppm
-strip ../$PACKAGE/bin/dppm
-
+shards build --progress --release --static
+mv bin ../$PACKAGE
