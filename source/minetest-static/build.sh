@@ -3,11 +3,7 @@
 # https://dev.minetest.net/Compiling_Minetest
 wget -qO- https://github.com/minetest/minetest/archive/$ver.tar.gz | tar xzf -
 
-cd minetest-$ver/games
-wget -qO- https://github.com/minetest/minetest_game/archive/$ver.tar.gz | tar xzf -
-mv minetest_game-$ver minetest_game
-cd ..
-
+cd minetest-$ver
 
 # Build
 cmake -DENABLE_CURL=0 \
@@ -19,4 +15,4 @@ cmake -DENABLE_CURL=0 \
       -DCMAKE_EXE_LINKER_FLAGS=-static
 
 make -j$(nproc) DESTDIR="$DIR/$PACKAGE"
-mv bin $DIR/$PACKAGE
+mv bin games builtin $DIR/$PACKAGE
