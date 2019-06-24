@@ -13,6 +13,7 @@ deps:
   - nasm
   - nodejs
   - npm
+  - tar
   - zip
   - zlib-dev
 
