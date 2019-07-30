@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+#set -eu
 
 # Current directory
 DIR=$(cd -P $(dirname $0) && pwd)
@@ -45,29 +45,33 @@ elif ! docker ps >/dev/null ;then
 fi
 
 PKG=$1
-
+TARGET_ARCH=$2
 case ${2-} in
   *,*) parsearch $2;;
   aarch64) error 'invalid arch, aarch64' 'do you mean `arm64`?';;
 esac
 
-PKGDIR=$BUILDDIR/$PKG/${2-$ARCH}
+if [ -z "$TARGET_ARCH" ]; then
+ TARGET_ARCH=$ARCH
+fi
+
+PKGDIR=$BUILDDIR/$PKG/$TARGET_ARCH
 
 # Check build directory
 mkdir -p $PKGDIR
-[ "$(ls $PKGDIR 2>/dev/null)" ] && error "$PKGDIR" 'already present, delete it first'
+#[ "$(ls $PKGDIR 2>/dev/null)" ] && error "$PKGDIR" 'already present, delete it first'
 [ -d "source/$PKG" ] || { error "source/$PKG" 'not found.'; }
 
 # No need of Qemu to run x86 on x86-64
-if [ "${2-}" = x86 ] && [ "$ARCH" = x86-64 ]; then
+if [ "TARGET_ARCH" = x86 ] && [ "$ARCH" = x86-64 ]; then
   docker_image=i386/alpine:$DTAG
 
 # Only x86_64 can cross-compile - for now
-elif [ "${2-}" ] && [ "$ARCH" != x86-64 ] && [ "$ARCH" != "$2" ] ;then
+elif [ "TARGET_ARCH" ] && [ "$ARCH" != x86-64 ] && [ "$ARCH" != "TARGET_ARCH" ] ;then
   error "$ARCH" "only x86_64 can cross compile."
 
 # https://github.com/multiarch/alpine
-elif [ "${2-}" ] && [ "${2-}" != "$ARCH" ] ;then
+elif [ "TARGET_ARCH" ] && [ "TARGET_ARCH" != "$ARCH" ] ;then
   docker_image=multiarch/alpine:$2-$MATAG
   # configure binfmt-support on the Docker host
   docker pull multiarch/qemu-user-static:register
@@ -87,7 +91,7 @@ delete_build() {
   info "build directory $PKGDIR deleted"
 }
 
-docker_args="-it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG"
+docker_args="-it --rm -v $PKGDIR:$CONTAINERDIR -w $CONTAINERDIR -e PKG=$PKG -e TARGET_ARCH=$2"
 
 if $DEV ;then
   info "You're actually on dev mode, you may need to run:
@@ -96,7 +100,7 @@ sh lib/main.sh"
 else
   docker run $docker_args -e PKG=$PKG $docker_image /bin/sh lib/main.sh || true
 
-  package=$(cd $PKGDIR; ls -d ${PKG}_*_${KERNEL}_${2-$ARCH}*) || {
+  package=$(cd $PKGDIR; ls -d ${PKG}_*_${TARGET_ARCH}*) || {
     error "$PKGDIR" "build not found"
     delete_build
     exit 1
@@ -111,7 +115,7 @@ else
     delete_build
     cd $DIR/build
     touch SHA512SUMS
-    sed -i "/.*${PKG}_.*_${KERNEL}_${2-$ARCH}\.tar\.xz/d" SHA512SUMS
+    sed -i "/.*${PKG}_.*_${KERNEL}_${TARGET_ARCH}\.tar\.xz/d" SHA512SUMS
     sha512sum $package >> SHA512SUMS
     sort -k2 SHA512SUMS -o SHA512SUMS
   else

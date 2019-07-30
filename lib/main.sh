@@ -34,7 +34,7 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    match="${dep}_.*_$SYSTEM.tar.xz"
+    match="${dep}_.*_${TARGET_ARCH}.tar.xz"
     package=$(printf '%b' "$sha512sums\n" | grep -om1 "$match") || error "no package match" "$match"
     wget "$MIRROR/$package" -O $package
 
@@ -45,9 +45,9 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
     esac
     tar xJf $package
     rm $package
-    chown -R 0:0 ${dep}_*_$SYSTEM*
-    cp -rf ${dep}_*_$SYSTEM*/* /usr
-    rm -rf ${dep}_*_$SYSTEM*
+    chown -R 0:0 ${dep}_*_$TARGET_ARCH*
+    cp -rf ${dep}_*_$TARGET_ARCH*/* /usr
+    rm -rf ${dep}_*_$TARGET_ARCH*
   done
 fi
 
@@ -55,7 +55,7 @@ fi
 [ "${ver-}" ] || error 'ver' 'no version number returned'
 
 # Create the directory
-PACKAGE=${PKG}_${ver}_$SYSTEM
+PACKAGE=${PKG}_${ver}_$TARGET_ARCH
 mkdir $PACKAGE
 
 info "Package to build: $PACKAGE"
