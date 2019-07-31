@@ -46,7 +46,7 @@ fi
 
 PKG=$1
 TARGET_ARCH=${2-$ARCH}
-case ${2-} in
+case $TARGET_ARCH in
   *,*) parsearch $2;;
   aarch64) error 'invalid arch, aarch64' 'do you mean `arm64`?';;
 esac
