@@ -1,5 +1,5 @@
 #!/bin/sh
-#set -eu
+set -eu
 
 # Current directory
 DIR=$(cd -P $(dirname $0) && pwd)
