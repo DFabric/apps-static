@@ -84,6 +84,12 @@ fi
 cp -r $DIR/source/$PKG/* $PKGDIR
 cp -r $DIR/lib $PKGDIR
 
+if [ -d $DIR/build ]; then
+mkdir $PKGDIR/local_builds
+cp -r $DIR/build/*${TARGET_ARCH}*.tar.xz $PKGDIR/local_builds 
+cp $DIR/build/SHA512SUMS $PKGDIR/local_builds
+fi
+
 docker pull $docker_image
 
 delete_build() {

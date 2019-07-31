@@ -24,6 +24,8 @@ fi
 . lib/regexlook.sh
 . lib/readyaml.sh
 
+
+
 # Alpine dependencies
 info 'Installing system depencies'
 apk add --update ca-certificates openssl wget $(readyaml -f pkg.yml deps alpine) $([ $COMPRESS ] && printf xz)
@@ -31,10 +33,31 @@ apk add --update ca-certificates openssl wget $(readyaml -f pkg.yml deps alpine)
 if [ "$(readyaml -f pkg.yml deps static)" ] ;then
   info 'Installing static libraries dependencies'
   sha512sums=$(wget -qO- $MIRROR/SHA512SUMS)
+  sha512sumsLocal=$(cat local_builds/SHA512SUMS)
   for dep in $(readyaml -f pkg.yml deps static) ;do
     # Download the depencies, listed on SHA512SUMS
     info "Installing $dep"
-    match="${dep}_.*_${TARGET_ARCH}.tar.xz"
+    match="${dep}*_${TARGET_ARCH}.tar.xz"
+   
+
+     info "Checking locally for $match" 
+     for f in local_builds/$match; do
+     info $f
+    ## Check if the glob gets expanded to existing files.
+    ## If not, f here will be exactly the pattern above
+    ## and the exists test will evaluate to false.
+    [ -e "$f" ] && localpackage="$f" 
+    ## This is all we needed to know, so we can break after the first iteration
+    break
+done 
+
+ 
+
+    if [ -f "$localpackage" ]; then 
+       info "local package found for ${dep} $localpackage"
+       package=$localpackage    
+   else
+    info "local package not found"
     package=$(printf '%b' "$sha512sums\n" | grep -om1 "$match") || error "no package match" "$match"
     wget "$MIRROR/$package" -O $package
 
@@ -43,8 +66,9 @@ if [ "$(readyaml -f pkg.yml deps static)" ] ;then
       "$(sha512sum $package)") info "SHA512SUMS match for $dep";;
       *) error "SHA512SUMS" "don't match for $package";;
     esac
+  fi
     tar xJf $package
-    rm $package
+    rm $package    
     chown -R 0:0 ${dep}_*_$TARGET_ARCH*
     cp -rf ${dep}_*_$TARGET_ARCH*/* /usr
     rm -rf ${dep}_*_$TARGET_ARCH*
