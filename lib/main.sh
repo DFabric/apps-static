@@ -68,7 +68,7 @@ done
     esac
   fi
     tar xJf $package
-    rm $package    
+    rm $package
     chown -R 0:0 ${dep}_*_$TARGET_ARCH*
     cp -rf ${dep}_*_$TARGET_ARCH*/* /usr
     rm -rf ${dep}_*_$TARGET_ARCH*
