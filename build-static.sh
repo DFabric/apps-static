@@ -63,6 +63,7 @@ mkdir -p $PKGDIR
 [ -d "source/$PKG" ] || { error "source/$PKG" 'not found.'; }
 
 # No need of Qemu to run x86 on x86-64
+info "${TARGET_ARCH} ${ARCH}"
 if [ "TARGET_ARCH" = x86 ] && [ "$ARCH" = x86-64 ]; then
   docker_image=i386/alpine:$DTAG
 
@@ -80,14 +81,16 @@ else
   docker_image=alpine:$DTAG
 fi
 
+info $docker_image
+
 # Copy to the build directory
 cp -r $DIR/source/$PKG/* $PKGDIR
 cp -r $DIR/lib $PKGDIR
 
 if [ -d $DIR/build ]; then
 mkdir $PKGDIR/local_builds
-cp -r $DIR/build/*${TARGET_ARCH}*.tar.xz $PKGDIR/local_builds 
-cp $DIR/build/SHA512SUMS $PKGDIR/local_builds
+cp -r $DIR/build/*${TARGET_ARCH}*.tar.xz $PKGDIR/local_builds || :
+cp $DIR/build/SHA512SUMS $PKGDIR/local_builds || :
 fi
 
 docker pull $docker_image
