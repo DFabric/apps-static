@@ -45,7 +45,7 @@ elif ! docker ps >/dev/null ;then
 fi
 
 PKG=$1
-TARGET_ARCH=$2
+TARGET_ARCH=${2-$ARCH}
 case ${2-} in
   *,*) parsearch $2;;
   aarch64) error 'invalid arch, aarch64' 'do you mean `arm64`?';;
