@@ -7,10 +7,9 @@ cd $GOPATH/src/github.com/pingcap
 wget -qO- https://github.com/pingcap/tidb/archive/v$ver.tar.gz | tar xzf -
 mv tidb-* tidb
 cd tidb
-rm go.sum
 
-export LDFLAGS='-extldflags -static'
+export LDFLAGS='-extldflags "-static -fuse-ld=bfd"'
 make
 
 mkdir $DIR/$PACKAGE/bin
-mv $GOPATH/bin/tidb-server $DIR/$PACKAGE/bin
+mv bin/tidb-server $DIR/$PACKAGE/bin

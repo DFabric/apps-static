@@ -21,7 +21,7 @@ wget -qO- https://github.com/mattermost/mattermost-server/archive/v$ver.tar.gz |
 mv mattermost-server* mattermost-server
 
 export GO111MODULE=on
-export LDFLAGS='-extldflags -static'
+export LDFLAGS='-extldflags "-static -fuse-ld=bfd"'
 cd mattermost-server
 make build
 cp config/default.json config/config.json
