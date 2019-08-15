@@ -16,8 +16,9 @@ KERNEL=$(uname -s | tr A-Z a-z)
 
 # Multiarch image tag
 case $DTAG in
-	edge)     MATAG=edge;;
-	*|latest) MATAG=latest-stable;;
+	edge)   MATAG=edge;;
+	latest) MATAG=latest-stable;;
+	*)      MATAG=v$DTAG;;
 esac
 
 case $(uname -m) in
