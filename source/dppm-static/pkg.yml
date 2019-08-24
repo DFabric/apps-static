@@ -4,14 +4,14 @@ deps:
   - g++
   - gc-dev
   - git
-  - llvm
-  - llvm-dev
-  - llvm-libs
-  - llvm-static
+  - llvm5
+  - llvm5-dev
+  - llvm5-libs
+  - llvm5-static
   - libevent-dev
+  - libevent-static
   - musl-dev
   - openssl-dev
-  - shards
   - yaml-dev
   - pcre-dev
   - zlib-dev
