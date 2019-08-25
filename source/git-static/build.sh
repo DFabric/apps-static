@@ -9,7 +9,6 @@ cd git-$ver
   NO_SVN_TESTS=YesPlease \
   NO_REGEX=YesPlease \
   USE_LIBPCRE2=YesPlease \
-  NO_NSEC=YesPlease \
   NO_SYS_POLL_H=1
 
 # Build & install

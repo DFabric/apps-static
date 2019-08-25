@@ -2,12 +2,11 @@ deps:
   alpine:
   - g++
   - gdbm-dev
-  - libffi-dev
   - libc-dev
-  - libressl
-  - make
+  - libffi-dev
   - linux-headers
-  - libressl-dev
+  - make
+  - openssl-dev
   - readline-dev
   - pcre-dev
   - yaml-dev

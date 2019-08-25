@@ -21,6 +21,7 @@ deps:
   - icu-dev
   - icu-static
   - libevent-dev
+  - libevent-static
   - libgcrypt-dev
   - libgd
   - libjpeg-turbo-dev

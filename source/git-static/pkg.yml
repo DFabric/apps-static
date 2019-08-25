@@ -1,8 +1,8 @@
 deps:
   alpine:
   - g++
-  - libressl
   - make
+  - openssl-dev
   - perl
   - perl-dev
   - tcl-dev

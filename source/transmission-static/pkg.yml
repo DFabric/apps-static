@@ -6,11 +6,12 @@ deps:
   - autoconf
   - bsd-compat-headers
   - g++
-  - libressl-dev
   - make
   - intltool
   - libevent-dev
+  - libevent-static
   - libssh2-dev
+  - openssl-dev
   - tar
   - xz
 
