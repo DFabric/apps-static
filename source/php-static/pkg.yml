@@ -8,6 +8,7 @@ deps:
   - autoconf
   - bison
   - bzip2-dev
+  - bzip2-static
   - db-dev
   - enchant-dev
   - expat-dev
@@ -40,7 +41,6 @@ deps:
   - sqlite-static
   - unixodbc-dev
   - zlib-dev
-  - libbz2-static
 
 version:
   src: https://secure.php.net/downloads.php
