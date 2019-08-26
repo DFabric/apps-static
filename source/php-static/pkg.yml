@@ -1,6 +1,4 @@
 deps:
-  static:
-  - curl-static
   alpine:
   - apr-dev
   - apr-util-dev
@@ -9,6 +7,8 @@ deps:
   - bison
   - bzip2-dev
   - bzip2-static
+  - curl-dev
+  - curl-static
   - db-dev
   - enchant-dev
   - expat-dev
@@ -36,12 +36,17 @@ deps:
   - make
   - mariadb-dev
   - net-snmp-dev
+  - nghttp2-dev
+  - nghttp2-static
   - openldap-dev
   - openssl-dev
+  - openssl-libs-static
   - readline-dev
+  - sqlite-dev
   - sqlite-static
   - unixodbc-dev
   - zlib-dev
+  - zlib-static
 
 version:
   src: https://secure.php.net/downloads.php

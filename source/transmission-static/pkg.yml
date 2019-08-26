@@ -1,19 +1,24 @@
 deps:
-  static:
-  - curl-static
   alpine:
   - automake
   - autoconf
   - bsd-compat-headers
+  - curl-dev
+  - curl-static
   - g++
   - make
   - intltool
   - libevent-dev
   - libevent-static
   - libssh2-dev
+  - nghttp2-dev
+  - nghttp2-static
   - openssl-dev
+  - openssl-libs-static
   - tar
   - xz
+  - zlib-dev
+  - zlib-static
 
 version:
   src: https://github.com/transmission/transmission/ref-list/master?source_action=disambiguate&source_controller=files

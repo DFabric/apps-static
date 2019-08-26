@@ -5,7 +5,7 @@ cd php-$ver
 
 ln -s /usr/include/libxml2/libxml/ /usr/include/libxml
 
-./configure LDFLAGS=-static PHP_LDFLAGS=-all-static \
+./configure PHP_LDFLAGS=-all-static LIBS="$(pkg-config --libs --static libcurl)" \
 	--prefix='/' \
 	--enable-static \
 	--enable-cgi \
