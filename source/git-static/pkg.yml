@@ -1,13 +1,15 @@
 deps:
   alpine:
+  - curl-dev
+  - curl-static
   - g++
   - make
+  - nghttp2-dev
+  - nghttp2-static
   - openssl-dev
-  - perl
-  - perl-dev
-  - tcl-dev
-  - tk-dev
+  - openssl-libs-static
   - zlib-dev
+  - zlib-static
 
 version:
   src: https://www.git-scm.com
