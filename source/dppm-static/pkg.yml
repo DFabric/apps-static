@@ -12,9 +12,11 @@ deps:
   - libevent-static
   - musl-dev
   - openssl-dev
-  - yaml-dev
+  - openssl-libs-static
   - pcre-dev
+  - yaml-dev
   - zlib-dev
+  - zlib-static
 
 version:
   src: https://github.com/DFabric/dppm/commits/master 
