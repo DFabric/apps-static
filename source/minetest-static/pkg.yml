@@ -17,5 +17,5 @@ deps:
   - zlib-dev
 
 version:
-  src: https://github.com/minetest/minetest/ref-list/master?source_action=disambiguate&source_controller=files
-  regex: (?<=title=")[0-9.]+(?=">)
+  src: https://github.com/minetest/minetest/refs-tags/master?source_action=disambiguate&source_controller=files
+  regex: (?<=title=")[0-9.]+(?=")
