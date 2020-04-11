@@ -15,6 +15,7 @@ deps:
   - sqlite-dev
   - sqlite-static
   - zlib-dev
+  - zlib-static
 
 version:
   src: https://github.com/minetest/minetest/refs-tags/master?source_action=disambiguate&source_controller=files

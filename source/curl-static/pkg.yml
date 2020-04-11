@@ -2,9 +2,12 @@ deps:
   alpine:
   - g++
   - openssl-dev
+  - openssl-libs-static
   - libssh2-dev
+  - libssh2-static
   - make
   - zlib-dev
+  - zlib-static
 
 version:
   src: https://curl.haxx.se/download/?C=M;O=D
